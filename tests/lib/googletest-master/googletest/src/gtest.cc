@@ -1493,7 +1493,7 @@ GTEST_IMPL_CMP_HELPER_(GT, > )
 // The helper function for {ASSERT|EXPECT}_STREQ.
 AssertionResult CmpHelperSTREQ(const char* lhs_expression,
                                const char* rhs_expression,
-                               std::basic_string<char> lhs,
+                               const char* lhs,
                                const char* rhs) {
   if (String::CStringEquals(lhs, rhs)) {
     return AssertionSuccess();

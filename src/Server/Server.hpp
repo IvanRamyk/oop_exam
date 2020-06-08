@@ -51,6 +51,7 @@ namespace ip {
         os << IP.fields[0] << '.' << IP.fields[1] << '.' << IP.fields[2] << '.' << IP.fields[3];
         return os;
     }
+
 }
 
 class Server {
