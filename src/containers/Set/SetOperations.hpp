@@ -33,6 +33,11 @@ struct SetOperations <SplayTree<T>> {
     {
         container.remove(container.search(value));
     }
+
+    static auto elements(SplayTree<T>& container)
+    {
+        return container.elements();
+    }
 };
 
 template <typename T>
@@ -56,6 +61,11 @@ struct SetOperations <SingleLinkedOrderedList<T>> {
     static auto erase(SingleLinkedOrderedList<T>& container, const value_type& value)
     {
         container.erase(value);
+    }
+
+    static auto elements(SingleLinkedOrderedList<T>& container)
+    {
+        return container.elements();
     }
 };
 

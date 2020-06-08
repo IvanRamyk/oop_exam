@@ -56,6 +56,33 @@ public:
         set.erase({key, Tvalue()});
     }
 
+    std::vector <Tkey> keys() {
+        auto elements = set._elements();
+        std::vector <Tkey> result;
+        for (auto i : elements) {
+            result.push_back(i.key);
+        }
+        return result;
+    }
+
+    std::vector <Tvalue> values() {
+        auto elements = set._elements();
+        std::vector <Tvalue> result;
+        for (auto i : elements) {
+            result.push_back(i.value);
+        }
+        return result;
+    }
+
+    std::vector <std::pair<Tkey, Tvalue>> pairs() {
+        auto elements = set._elements();
+        std::vector <std::pair<Tkey, Tvalue>> result;
+        for (auto i : elements) {
+            result.push_back({i.key,i.value});
+        }
+        return result;
+    }
+
 private:
     Tset set;
 };

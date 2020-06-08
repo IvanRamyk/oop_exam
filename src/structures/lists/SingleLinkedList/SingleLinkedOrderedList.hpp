@@ -85,7 +85,7 @@ public:
             auto temp = tail;
             tail = node;
             tail->next = nullptr;
-            delete temp;
+            //delete temp;
         }
     }
     void pop_front() {
@@ -96,7 +96,7 @@ public:
         else {
             auto temp = head;
             head = head->next;
-            delete temp;
+            //delete temp;
         }
     }
 
@@ -124,6 +124,16 @@ public:
                 break;
             else node = node->next;
         return node;
+    }
+
+    std::vector <T> elements() {
+        std::vector <T> res;
+        auto node = head;
+        while (node != nullptr) {
+            res.push_back(node->value());
+            node = node->next;
+        }
+        return res;
     }
 
 };

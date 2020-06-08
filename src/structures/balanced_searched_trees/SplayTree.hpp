@@ -51,6 +51,14 @@ private:
 
     SplayTreeNode <TreeItem> * _merge(SplayTreeNode<TreeItem> * first, SplayTreeNode<TreeItem> * second);
 
+    void _elements(SplayTreeNode<TreeItem> * node, std::vector <TreeItem>& res) {
+        if (node != nullptr) {
+            res.push_back(node->value());
+            _elements(node->_left, res);
+            _elements(node->_right, res);
+        }
+    }
+
 public:
     using value_type = TreeItem;
     TreeIterator<TreeItem> begin();
@@ -68,6 +76,12 @@ public:
     std::vector<std::pair<TreeItem, TreeItem>> print();
 
     int height();
+
+    std::vector <TreeItem> elements() {
+        std::vector <TreeItem> res;
+        _elements(_root, res);
+        return res;
+    }
 };
 
 
