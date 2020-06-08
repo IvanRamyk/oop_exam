@@ -7,6 +7,6 @@ include_directories(tests/lib/googletest-master/googletest/include)
 include_directories(tests/lib/googletest-master/googlemock/include)
 
 add_executable(oop_exam main.cpp src/Server/Server.cpp src/Server/Server.hpp src/structures/balanced_searched_trees/AVLTree.hpp src/structures/balanced_searched_trees/AVLTree.tpp
-        src/structures/balanced_searched_trees/BPlusTree.hpp src/structures/balanced_searched_trees/BPlusTree.tpp src/structures/balanced_searched_trees/SplayTree.hpp src/structures/balanced_searched_trees/Tree.hpp tests/SplayTreeTests.cpp)
+        src/structures/balanced_searched_trees/BPlusTree.hpp src/structures/balanced_searched_trees/BPlusTree.tpp src/structures/balanced_searched_trees/SplayTree.hpp src/structures/balanced_searched_trees/Tree.hpp tests/SplayTreeTests.cpp src/Date/Date.hpp tests/DateTimeTests.cpp src/structures/lists/SingleLinkedList/SingleLinkedList.hpp tests/SingleLinkedListTests.cpp)
 
 target_link_libraries(oop_exam gtest gtest_main)

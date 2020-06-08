@@ -1635,7 +1635,7 @@ GTEST_IMPL_CMP_HELPER_(GT, >);
 // INTERNAL IMPLEMENTATION - DO NOT USE IN A USER PROGRAM.
 GTEST_API_ AssertionResult CmpHelperSTREQ(const char* s1_expression,
                                           const char* s2_expression,
-                                          std::basic_string<char> s1,
+                                          const char* s1,
                                           const char* s2);
 
 // The helper function for {ASSERT|EXPECT}_STRCASEEQ.
