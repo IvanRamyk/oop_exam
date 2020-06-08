@@ -52,6 +52,7 @@ private:
     SplayTreeNode <TreeItem> * _merge(SplayTreeNode<TreeItem> * first, SplayTreeNode<TreeItem> * second);
 
 public:
+    using value_type = TreeItem;
     TreeIterator<TreeItem> begin();
 
     TreeIterator<TreeItem> end();
