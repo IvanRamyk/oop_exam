@@ -33,7 +33,7 @@ public:
 };
 
 template <typename TreeItem>
-class SplayTree: public Tree<TreeItem> {
+class SplayTree: public BalancedTree <TreeItem> {
 private:
     SplayTreeNode <TreeItem> * _root;
 

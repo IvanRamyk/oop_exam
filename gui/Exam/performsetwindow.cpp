@@ -1,10 +1,11 @@
 #include "performsetwindow.h"
 #include "ui_performsetwindow.h"
 
-
-PerformSetWindow::PerformSetWindow(QWidget *parent) :
+//template <class T>
+PerformSetWindow::PerformSetWindow(containType _type, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::PerformSetWindow)
+    ui(new Ui::PerformSetWindow),
+    containerType(_type)
 {
     ui->setupUi(this);
     ui->insertElement->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -12,20 +13,36 @@ PerformSetWindow::PerformSetWindow(QWidget *parent) :
     ui->deleteElement->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     fillTable(0);
 
+   /* if(containerType == typeList){
+        set = nullptr;
+    } else if(containerType == typeBalancedTree){
+        if(elementType == elementServer){
+            set = new SplayTree<Server>();
+        } else{
+            set = new SplayTree<date_time::Date>();
+        }
+    } else {
+        set = nullptr;
+    }*/
+
     //->horizontalHeader()->setResizeMode();//->setResizeMode(QHeaderView::Stretch);
 }
 
+//template <class T>
 PerformSetWindow::~PerformSetWindow()
 {
+   // delete set;
     delete ui;
 }
 
+//template <class T>
 void PerformSetWindow::on_backButton_clicked()
 {
     emit SetWindowShow();
     this->close();
 }
 
+//template <class T>
 void PerformSetWindow::fillTable(int index){
     int n;
     std::vector <QString> names;
@@ -76,6 +93,7 @@ void PerformSetWindow::fillTable(int index){
 
 }
 
+//template <class T>
 void PerformSetWindow::on_contentBox_activated(int index)
 {
     fillTable(index);

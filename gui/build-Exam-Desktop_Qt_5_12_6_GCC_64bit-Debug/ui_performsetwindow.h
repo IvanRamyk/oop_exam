@@ -151,7 +151,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem5 = deleteElement->horizontalHeaderItem(1);
         ___qtablewidgetitem5->setText(QApplication::translate("PerformSetWindow", "Field Value", nullptr));
         foundIndicator->setText(QString());
-        functionalLlabel->setText(QApplication::translate("PerformSetWindow", "\320\244\321\203\320\275\320\272\321\206\321\226\320\276\320\275\320\260\320\273: \320\274\320\275\320\276\320\266\320\270\320\275\320\260", nullptr));
+        functionalLlabel->setText(QApplication::translate("PerformSetWindow", "\320\244\321\203\320\275\320\272\321\206\321\226\320\276\320\275\320\260\320\273: \320\234\320\275\320\276\320\266\320\270\320\275\320\260", nullptr));
         realisationLabel->setText(QApplication::translate("PerformSetWindow", "\320\240\320\265\320\260\320\273\321\226\320\267\320\260\321\206\321\226\321\217:", nullptr));
         contextLabel->setText(QApplication::translate("PerformSetWindow", "\320\237\321\200\320\265\320\264\320\274\320\265\321\202\320\275\320\260 \320\276\320\261\320\273\320\260\321\201\321\202\321\214:", nullptr));
         backButton->setText(QApplication::translate("PerformSetWindow", "\320\235\320\260\320\267\320\260\320\264", nullptr));
