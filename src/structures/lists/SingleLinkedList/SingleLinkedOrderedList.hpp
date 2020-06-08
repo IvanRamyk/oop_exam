@@ -25,8 +25,8 @@ class SingleLinkedOrderedList {
 private:
     SingleLinkedNode<T> * head;
     SingleLinkedNode<T> * tail;
-    int cnt_nodes{};
 public:
+    using value_type = T;
     SingleLinkedOrderedList() {
         head = tail = nullptr;
     }
@@ -50,16 +50,29 @@ public:
             return;
         }
         auto cur = head;
-        while (cur->value < data) {
-
+        auto prev = new SingleLinkedNode<T>;
+        while (cur != nullptr && cur->value < data) {
+            prev = cur;
+            cur = cur->next;
         }
-
+        if (cur == nullptr) {
+            prev->next = node;
+            tail = node;
+            return;
+        }
+        if (cur->value == data) {
+            cur->value = data;
+            delete node;
+        }
+        auto temp = prev->next;
+        prev->next =node;
+        node->next = temp;
 
     }
+
     void pop_back() {
         if (head == nullptr)
             return;
-        cnt_nodes--;
         if (head == tail)
             head = tail = nullptr;
         else {
@@ -75,7 +88,6 @@ public:
     void pop_front() {
         if (head == nullptr)
             return;
-        cnt_nodes--;
         if (head == tail)
             head = tail = nullptr;
         else {
@@ -84,36 +96,33 @@ public:
             delete temp;
         }
     }
-    void erase(int pos) {
-        if (pos >= cnt_nodes)
-            return;
-        if (pos == 0)
+
+    void erase(T value) {
+        auto cur = head;
+        auto prev = new SingleLinkedNode<T>;
+        while (cur != nullptr && cur->value != value) {
+            prev = cur;
+            cur = cur->next;
+        }
+        if (cur == head)
             pop_front();
-        else if (pos == cnt_nodes - 1)
+        if (cur == tail)
             pop_back();
-        else {
-            cnt_nodes--;
-            auto prev = new SingleLinkedNode<T>;
-            auto node = head;
-            for (int i = 0; i < pos; ++i) {
-                prev = node;
-                node = node->next;
-            }
-            prev->next = node->next;
-            delete node;
+        if (cur != nullptr) {
+            prev->next = cur->next;
+            delete cur;
         }
     }
 
-    T select(int pos) {
+    SingleLinkedNode<T> * search(T value) {
         auto node = head;
-        for (int i = 0; i < pos; ++i)
-            node = node->next;
-        return node->value;
+        while (node != nullptr)
+            if (node->value == value)
+                break;
+            else node = node->next;
+        return node;
     }
 
-    int size() {
-        return cnt_nodes;
-    }
 };
 
 #endif //OOP_EXAM_SINGLELINKEDORDEREDLIST_HPP
