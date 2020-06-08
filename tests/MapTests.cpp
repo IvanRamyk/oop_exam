@@ -13,3 +13,11 @@ TEST(Map, MapSplayTree){
     map.insert(3, 10);
 
 }
+
+TEST(Map, MapListTree){
+    Map <int, int, SingleLinkedOrderedList> map;
+    map.insert(3, 4);
+    EXPECT_EQ(map.getValue(3), 4);
+    map.insert(3, 10);
+
+}
