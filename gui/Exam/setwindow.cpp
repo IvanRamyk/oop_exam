@@ -15,7 +15,11 @@ SetWindow::~SetWindow()
 
 void SetWindow::on_listButton_clicked()
 {
+    perfromWindow = new PerformSetWindow();
+    connect(perfromWindow, &PerformSetWindow::SetWindowShow, this, &SetWindow::show);
 
+    perfromWindow->show();
+    this->close();
 }
 
 void SetWindow::on_treeButton_clicked()

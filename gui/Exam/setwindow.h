@@ -1,6 +1,7 @@
 #ifndef SETWINDOW_H
 #define SETWINDOW_H
 
+#include "performsetwindow.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -29,6 +30,7 @@ private slots:
 
 private:
     Ui::SetWindow *ui;
+    PerformSetWindow *perfromWindow;
 };
 
 #endif // SETWINDOW_H

@@ -19,18 +19,21 @@ SOURCES += \
     containerwindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    performsetwindow.cpp \
     setwindow.cpp \
     sortwindow.cpp
 
 HEADERS += \
     containerwindow.h \
     mainwindow.h \
+    performsetwindow.h \
     setwindow.h \
     sortwindow.h
 
 FORMS += \
     containerwindow.ui \
     mainwindow.ui \
+    performsetwindow.ui \
     setwindow.ui \
     sortwindow.ui
 
