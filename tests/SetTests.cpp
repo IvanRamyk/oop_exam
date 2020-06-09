@@ -4,6 +4,7 @@
 
 #include <gtest/gtest.h>
 #include "../src/containers/Set/Set.hpp"
+#include "../src/Date/Date.hpp"
 
 
 TEST(Set, SplayTreeImpl) {
@@ -136,4 +137,15 @@ TEST(Set, SymmetricDifference2) {
         EXPECT_TRUE(set3.count(i));
     for (int i = 5; i < 10;++i)
         EXPECT_FALSE(set3.count(i));
+}
+
+TEST(Set, withDateAndTime) {
+    Set<SingleLinkedOrderedList<date_time::Date>> set;
+    set.insert(date_time::Date(2001, date_time::Feb, 25));
+
+    Set<SingleLinkedOrderedList<date_time::Time>> forTime;
+    forTime.insert(date_time::Time(23, 0, 25));
+
+    Set<SingleLinkedOrderedList<date_time::DateTime>> forDateTime;
+    forDateTime.insert(date_time::DateTime(2001, date_time::Feb, 25, 7, 7, 0));
 }
