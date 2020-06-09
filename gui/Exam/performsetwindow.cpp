@@ -111,6 +111,18 @@ void PerformSetWindow::fillTable(int index){
 void PerformSetWindow::on_contentBox_activated(int index)
 {
     fillTable(index);
+    switch(index){
+        case 0:
+            elementType = elementServer;
+            break;
+        case 1:
+            elementType = elementDateTime;
+            break;
+        default:
+            elementType = elementServer;
+            std::cout << "SOME SHIT IS GOING ON!\n";
+        break;
+    }
 }
 
 
@@ -171,8 +183,8 @@ void PerformSetWindow::fillElement(int tableId, date_time::DateTime& dt){
         names[i] = table->item(i,1)->text().toInt();
         //check correct
     }
-    //date_time::DateTime newdt(2001, date_time::Feb, 25, 7, 7, 0);
-    //dt = newdt;
+    date_time::DateTime newdt(names[0]-1, date_time::Month(names[1]-1), names[2], names[3], names[4], names[5]);
+    dt = newdt;
 }
 
 
