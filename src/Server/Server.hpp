@@ -5,6 +5,7 @@
 #ifndef OOP_EXAM_SERVER_HPP
 #define OOP_EXAM_SERVER_HPP
 
+
 #include <string>
 #include <utility>
 #include <vector>
@@ -46,11 +47,7 @@ namespace ip {
 
 
     };
-    std::ostream& operator<<(std::ostream& os, const address& IP)
-    {
-        os << IP.fields[0] << '.' << IP.fields[1] << '.' << IP.fields[2] << '.' << IP.fields[3];
-        return os;
-    }
+
 
 }
 

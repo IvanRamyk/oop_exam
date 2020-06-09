@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     containerwindow.cpp \
+    displayelement.cpp \
     main.cpp \
     mainwindow.cpp \
     performsetwindow.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     containerwindow.h \
+    displayelement.h \
     mainwindow.h \
     performsetwindow.h \
     setwindow.h \

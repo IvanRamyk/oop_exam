@@ -1,6 +1,22 @@
 #include "performsetwindow.h"
 #include "ui_performsetwindow.h"
 
+Set<SplayTree<Server>> setSplayServer;
+Set<SplayTree<date_time::DateTime>> setSplayDateTime;
+
+
+
+Server PerformSetWindow::getServerElement(){
+    ip::address ads(127,0,0,1);
+    Server s(ads);
+    return s;
+
+}
+date_time::DateTime PerformSetWindow::getDateTimeElement(){
+    date_time::DateTime dt;
+    return dt;
+}
+
 
 PerformSetWindow::PerformSetWindow(containType _type, QWidget *parent) :
     QMainWindow(parent),
@@ -12,6 +28,7 @@ PerformSetWindow::PerformSetWindow(containType _type, QWidget *parent) :
     ui->findElement->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->deleteElement->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     fillTable(0);
+    elementType = elementServer;
 
     switch (containerType) {
         case typeList:
@@ -24,6 +41,8 @@ PerformSetWindow::PerformSetWindow(containType _type, QWidget *parent) :
             ui->realisationLabel->setText("Реалізація: Геш-таблиця");
             break;
     }
+
+
 
    /* if(containerType == typeList){
         set = nullptr;
@@ -43,7 +62,6 @@ PerformSetWindow::PerformSetWindow(containType _type, QWidget *parent) :
 
 PerformSetWindow::~PerformSetWindow()
 {
-   // delete set;
     delete ui;
 }
 
@@ -102,23 +120,93 @@ void PerformSetWindow::fillTable(int index){
         it->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
         ui->deleteElement->setItem(j,0,it);
     }
-
 }
+
 
 void PerformSetWindow::on_contentBox_activated(int index)
 {
     fillTable(index);
 }
 
+
+template <class T>
+T getElement(elemType _t){
+    if(_t == elementServer){
+        ip::address adr(127,0,0,1);
+        Server s(adr);
+        return s;
+    } else {
+        date_time::DateTime dt;
+        return dt;
+    }
+}
+
+
+
+void PerformSetWindow::fillElement(int tableId, Server &s){
+    QTableWidget* table;
+    switch(tableId){
+        case 0:
+            table = ui->insertElement;
+            break;
+        case 1:
+            table = ui->findElement;
+            break;
+        case 2:
+            table = ui->deleteElement;
+            break;
+    }
+
+    std::vector<int> id = {1,2,3,4};
+    ip::address aps(1,2,3,4);
+    s.IP = aps;
+    s.id = table->takeItem(1,3)->text().toInt();
+    s.rack = new Rack("", nullptr);
+}
+
+
+void PerformSetWindow::fillElement(int tableId, date_time::DateTime& dt){
+    QTableWidget* table;
+    switch(tableId){
+        case 0:
+            table = ui->insertElement;
+            break;
+        case 1:
+            table = ui->findElement;
+            break;
+        case 2:
+            table = ui->deleteElement;
+            break;
+    }
+    int names[6];
+    for(int i  =0; i < 6; i++){
+        names[i] = table->takeItem(i,1)->text().toInt();
+        //check correct
+    }
+    date_time::DateTime newdt(2001, date_time::Feb, 25, 7, 7, 0);
+    dt = newdt;
+}
+
+
 void PerformSetWindow::on_findButton_clicked()
 {
-    static int COUNTER = 0;
-    if(COUNTER%2){
-        ui->foundIndicator->setText("Found!");
+    if(elementType == elementServer){
+        auto element = getServerElement();
+        fillElement(1,element);
+        bool OK = findServerInSet(containerType, element);
+        if(OK)
+            ui->foundIndicator->setText("Found!");
+        else
+            ui->foundIndicator->setText("Not found...");
     } else {
-        ui->foundIndicator->setText("Not found...");
+        auto element = getDateTimeElement();
+        fillElement(1,element);
+        bool OK = findDateTimeInSet(containerType, element);
+        if(OK)
+            ui->foundIndicator->setText("Found!");
+        else
+            ui->foundIndicator->setText("Not found...");
     }
-    COUNTER++;
 
 }
 
@@ -135,3 +223,11 @@ void PerformSetWindow<setType, elemType>::on_findButton_clicked()
     }
 }
 */
+
+
+bool PerformSetWindow::findServerInSet(containType _t, Server s){
+    if(_t == typeBalancedTree){
+        return setSplayServer.count(s);
+    }
+    return true;
+}
