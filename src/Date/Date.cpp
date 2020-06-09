@@ -35,7 +35,9 @@ namespace date_time {
     }
 
     bool operator ==(Time A, Time B) {
-        return (!(A < B) && !(B < A));
+        return A.hours == B.hours &&
+                A.minutes == B.minutes &&
+                A.seconds == B.seconds;
     }
 
     bool operator !=(Time A, Time B) {
@@ -88,7 +90,9 @@ namespace date_time {
     }
 
     bool operator ==(Date A, Date B) {
-        return (!(A < B) && !(B < A));
+        return A.day == B.day &&
+                A.month == B.month &&
+                A.year == B.year;
     }
 
     bool operator !=(Date A, Date B) {
@@ -115,7 +119,7 @@ namespace date_time {
     }
 
     bool operator ==(DateTime A, DateTime B) {
-        return (!(A < B) && !(B < A));
+        return A.date == B.date && A.time == B.time;
     }
 
     bool operator !=(DateTime A, DateTime B) {
