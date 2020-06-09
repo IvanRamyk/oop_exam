@@ -53,10 +53,10 @@ namespace date_time {
         }
         Date(int _year = 0, Month _month = Month(0), int _day = 1975): year(_year), month(_month), day(_day){}
     };
-    std::ostream& operator<<(std::ostream& out, const Date date)
+   /* inline std::ostream& operator<<(std::ostream& out, const Date date)
     {
         return out << date.to_string();
-    }
+    }*/
     class Time {
         int hours;
         int minutes;
@@ -79,10 +79,10 @@ namespace date_time {
            return res;
         }
     };
-    std::ostream& operator<<(std::ostream& out, const Time time)
+  /*  inline std::ostream& operator<<(std::ostream& out, const Time time)
     {
         return out << time.to_string();
-    }
+    }*/
 
     class DateTime {
     private:
@@ -98,10 +98,10 @@ namespace date_time {
         }
     };
 
-    std::ostream& operator<<(std::ostream& out, const DateTime time)
+  /*  inline std::ostream& operator<<(std::ostream& out, const DateTime time)
     {
         return out << time.to_string();
-    }
+    }*/
 }
 
 #endif //OOP_EXAM_DATE_HPP

@@ -16,7 +16,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -g -std=gnu++1y -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I../Exam -I. -I/home/sadoffnick/Qt/5.12.6/gcc_64/include -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I/home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/sadoffnick/Qt/5.12.6/gcc_64/bin/qmake
 DEL_FILE      = rm -f
@@ -693,7 +693,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp
-	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp
+	g++ -pipe -g -std=gnu++1y -Wall -W -dM -E -o moc_predefs.h /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_containerwindow.cpp moc_mainwindow.cpp moc_performsetwindow.cpp moc_setwindow.cpp moc_sortwindow.cpp
 compiler_moc_header_clean:
@@ -811,6 +811,11 @@ moc_containerwindow.cpp: ../Exam/containerwindow.h \
 
 moc_mainwindow.cpp: ../Exam/mainwindow.h \
 		../Exam/setwindow.h \
+		../Exam/performsetwindow.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -924,6 +929,10 @@ moc_mainwindow.cpp: ../Exam/mainwindow.h \
 	/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/build-Exam-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/Exam -I/home/sadoffnick/Qt/5.12.6/gcc_64/include -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Exam/mainwindow.h -o moc_mainwindow.cpp
 
 moc_performsetwindow.cpp: ../Exam/performsetwindow.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1035,6 +1044,11 @@ moc_performsetwindow.cpp: ../Exam/performsetwindow.h \
 	/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/build-Exam-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/Exam -I/home/sadoffnick/Qt/5.12.6/gcc_64/include -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Exam/performsetwindow.h -o moc_performsetwindow.cpp
 
 moc_setwindow.cpp: ../Exam/setwindow.h \
+		../Exam/performsetwindow.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1427,6 +1441,11 @@ containerwindow.o: ../Exam/containerwindow.cpp ../Exam/containerwindow.h \
 
 main.o: ../Exam/main.cpp ../Exam/mainwindow.h \
 		../Exam/setwindow.h \
+		../Exam/performsetwindow.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1546,6 +1565,11 @@ main.o: ../Exam/main.cpp ../Exam/mainwindow.h \
 
 mainwindow.o: ../Exam/mainwindow.cpp ../Exam/mainwindow.h \
 		../Exam/setwindow.h \
+		../Exam/performsetwindow.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1677,6 +1701,10 @@ mainwindow.o: ../Exam/mainwindow.cpp ../Exam/mainwindow.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Exam/mainwindow.cpp
 
 performsetwindow.o: ../Exam/performsetwindow.cpp ../Exam/performsetwindow.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1783,10 +1811,59 @@ performsetwindow.o: ../Exam/performsetwindow.cpp ../Exam/performsetwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
-		ui_performsetwindow.h
+		ui_performsetwindow.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/QVariant \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QApplication \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qapplication.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qeventloop.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qguiapplication.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qinputmethod.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QComboBox \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qcombobox.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qvalidator.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qregularexpression.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qslider.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qstyle.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qframe.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QFrame \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QHeaderView \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QLabel \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qlabel.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMenuBar \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmenu.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qaction.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QPushButton \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QStatusBar \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QTableWidget \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtablewidget.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtableview.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o performsetwindow.o ../Exam/performsetwindow.cpp
 
 setwindow.o: ../Exam/setwindow.cpp ../Exam/setwindow.h \
+		../Exam/performsetwindow.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \

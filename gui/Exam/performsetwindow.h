@@ -1,9 +1,10 @@
 #ifndef PERFORMSETWINDOW_H
 #define PERFORMSETWINDOW_H
 
-#include "../../src/Server/Server.hpp"
-//#include "../../src/Date/Date.hpp"
-//#include "../../src/structures/balanced_searched_trees/SplayTree.hpp"
+//#include "../../src/Server/Server.hpp"
+#include "../../src/Date/Date.hpp"
+#include "../../src/containers/Set/Set.hpp"
+#include "../../src/structures/balanced_searched_trees/SplayTree.hpp"
 #include <QMainWindow>
 
 enum containType {typeList, typeBalancedTree, typeTable};
@@ -14,7 +15,6 @@ namespace Ui {
 class PerformSetWindow;
 }
 
-//template<class T>
 class PerformSetWindow : public QMainWindow
 {
     Q_OBJECT
@@ -31,12 +31,15 @@ private slots:
     void on_backButton_clicked();
     void on_contentBox_activated(int index);
 
+    void on_findButton_clicked();
+
 private:
     Ui::PerformSetWindow *ui;
     void fillTable(int index);
     containType containerType;
     elemType elementType;
-   // T* set;
+
+
 };
 
 #endif // PERFORMSETWINDOW_H

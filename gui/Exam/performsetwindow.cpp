@@ -1,7 +1,7 @@
 #include "performsetwindow.h"
 #include "ui_performsetwindow.h"
 
-//template <class T>
+
 PerformSetWindow::PerformSetWindow(containType _type, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PerformSetWindow),
@@ -12,6 +12,18 @@ PerformSetWindow::PerformSetWindow(containType _type, QWidget *parent) :
     ui->findElement->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->deleteElement->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     fillTable(0);
+
+    switch (containerType) {
+        case typeList:
+            ui->realisationLabel->setText("Реалізація: Список");
+            break;
+        case typeBalancedTree:
+            ui->realisationLabel->setText("Реалізація: Дерево");
+            break;
+        case typeTable:
+            ui->realisationLabel->setText("Реалізація: Геш-таблиця");
+            break;
+    }
 
    /* if(containerType == typeList){
         set = nullptr;
@@ -28,21 +40,21 @@ PerformSetWindow::PerformSetWindow(containType _type, QWidget *parent) :
     //->horizontalHeader()->setResizeMode();//->setResizeMode(QHeaderView::Stretch);
 }
 
-//template <class T>
+
 PerformSetWindow::~PerformSetWindow()
 {
    // delete set;
     delete ui;
 }
 
-//template <class T>
+
 void PerformSetWindow::on_backButton_clicked()
 {
     emit SetWindowShow();
     this->close();
 }
 
-//template <class T>
+
 void PerformSetWindow::fillTable(int index){
     int n;
     std::vector <QString> names;
@@ -93,8 +105,33 @@ void PerformSetWindow::fillTable(int index){
 
 }
 
-//template <class T>
 void PerformSetWindow::on_contentBox_activated(int index)
 {
     fillTable(index);
 }
+
+void PerformSetWindow::on_findButton_clicked()
+{
+    static int COUNTER = 0;
+    if(COUNTER%2){
+        ui->foundIndicator->setText("Found!");
+    } else {
+        ui->foundIndicator->setText("Not found...");
+    }
+    COUNTER++;
+
+}
+
+
+/*
+
+void PerformSetWindow<setType, elemType>::on_findButton_clicked()
+{
+    elemType* elem = createNewElement(1);
+    if(set->find(elem) != nullptr){
+        ui->foundIndicator->setText("Found!");
+    } else {
+        ui->foundIndicator->setText("Not found...");
+    }
+}
+*/

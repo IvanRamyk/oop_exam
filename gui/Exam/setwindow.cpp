@@ -13,6 +13,7 @@ SetWindow::~SetWindow()
     delete ui;
 }
 
+
 void SetWindow::on_listButton_clicked()
 {
     perfromWindow = new PerformSetWindow(typeList);
@@ -27,8 +28,8 @@ void SetWindow::on_treeButton_clicked()
     perfromWindow = new PerformSetWindow(typeBalancedTree);
     connect(perfromWindow, &PerformSetWindow::SetWindowShow, this, &SetWindow::show);
 
-    perfromWindow->show();
     this->close();
+    perfromWindow->show();
 }
 
 void SetWindow::on_tableButton_clicked()
