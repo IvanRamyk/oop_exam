@@ -10,31 +10,7 @@
 #include <utility>
 #include <vector>
 #include <iostream>
-
-class Server;
-class Rack;
-
-class Company {
-public:
-    std::string name;
-    std::vector<Server *> servers;
-
-    explicit Company(std::string _name) : name(std::move(_name)) {}
-};
-
-class DataCenter {
-    std::string name;
-    std::vector <Rack *> racks;
-    explicit DataCenter(std::string _name): name(std::move(_name)) {}
-};
-
-class Rack {
-public:
-    std::string index;
-    std::vector <Server * > servers;
-    DataCenter * data_center;
-    explicit Rack(std::string _index = "", DataCenter * center = nullptr): index(std::move(_index)), data_center(center){}
-};
+#include <cassert>
 
 namespace ip {
     class address {
@@ -42,6 +18,10 @@ namespace ip {
     public:
         explicit address(int value1 = 0, int value2 = 0, int value3 = 0, int value4 = 0) {
             fields = {value1, value2, value3, value4};
+        }
+        explicit address(std::vector<int> vls) {
+            assert(vls.size() == 4 && "Vector must contain 4 fields!");
+            fields = {vls[0], vls[1], vls[2], vls[3]};
         }
         friend std::ostream& operator<<(std::ostream& os, const address& IP);
 
@@ -54,9 +34,9 @@ namespace ip {
 class Server {
 public:
     ip::address IP;
-    int id;
-    Rack * rack;
-    explicit Server(ip::address _IP, int _id = -1, Rack * _rack = nullptr): IP(std::move(_IP)), id(_id), rack(_rack) {};
+    std::string data_center;
+    std::string rack;
+    explicit Server(ip::address _IP, int _id = -1, std::string _rack = "", std::string center = ""): IP(std::move(_IP)), data_center(center), rack(_rack) {};
 };
 
 
