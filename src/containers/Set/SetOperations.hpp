@@ -25,7 +25,8 @@ struct SetOperations <SplayTree<T>> {
 
     static auto count(SplayTree<T>& container, const value_type& value)
     {
-        return container.search(value) != nullptr;
+        auto c = container.search(value);
+        return c != nullptr;
     }
 
     static auto search(SplayTree<T>& container, const value_type& value)

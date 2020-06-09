@@ -42,21 +42,6 @@ PerformSetWindow::PerformSetWindow(containType _type, QWidget *parent) :
             break;
     }
 
-
-
-   /* if(containerType == typeList){
-        set = nullptr;
-    } else if(containerType == typeBalancedTree){
-        if(elementType == elementServer){
-            set = new SplayTree<Server>();
-        } else{
-            set = new SplayTree<date_time::Date>();
-        }
-    } else {
-        set = nullptr;
-    }*/
-
-    //->horizontalHeader()->setResizeMode();//->setResizeMode(QHeaderView::Stretch);
 }
 
 
@@ -160,7 +145,11 @@ void PerformSetWindow::fillElement(int tableId, Server &s){
     std::vector<int> id = {1,2,3,4};
     ip::address aps(1,2,3,4);
     s.IP = aps;
-    s.data_center = table->item(1,0)->text().toStdString();
+    auto dc = table->item(1,1)->text().toStdString();
+    s.data_center = dc;
+    auto rc = table->item(2,1)->text().toStdString();
+    s.rack = rc;
+
 }
 
 
@@ -194,15 +183,15 @@ void PerformSetWindow::on_findButton_clicked()
         fillElement(1,element);
         bool OK = findServerInSet(containerType, element);
         if(OK)
-            ui->foundIndicator->setText(QString::fromStdString(element.data_center));
+            ui->foundIndicator->setText("Found!");
         else
-            ui->foundIndicator->setText(QString::fromStdString(element.data_center + "Not found..."));
+            ui->foundIndicator->setText("Not found...");
     } else {
         auto element = getDateTimeElement();
         fillElement(1,element);
         bool OK = findDateTimeInSet(containerType, element);//bool OK = findDateTimeInSet(containerType, element);
         if(OK)
-            ui->foundIndicator->setText(QString::fromStdString(element.to_string()));
+            ui->foundIndicator->setText("Found!");
         else
             ui->foundIndicator->setText("Not found...");
     }
@@ -210,24 +199,12 @@ void PerformSetWindow::on_findButton_clicked()
 }
 
 
-/*
-
-void PerformSetWindow<setType, elemType>::on_findButton_clicked()
-{
-    elemType* elem = createNewElement(1);
-    if(set->find(elem) != nullptr){
-        ui->foundIndicator->setText("Found!");
-    } else {
-        ui->foundIndicator->setText("Not found...");
-    }
-}
-*/
-
-
 bool PerformSetWindow::findServerInSet(containType _t, Server s){
     if(_t == typeBalancedTree){
-     //   return setSplayServer.count(s);
-        return false;//setSplayServer.count(s);
+        auto x = setSplayServer.count(s);
+        std::cout << x << std::endl;
+        return x;
+        //return false;//setSplayServer.count(s);
     }
     return true;
 }
@@ -235,7 +212,64 @@ bool PerformSetWindow::findServerInSet(containType _t, Server s){
 bool PerformSetWindow::findDateTimeInSet(containType _t, date_time::DateTime s){
     if(_t == typeBalancedTree){
      //   return setSplayServer.count(s);
-        return false;//setSplayDateTime.count(s);
+        return setSplayDateTime.count(s);
     }
     return true;
 }
+
+
+void PerformSetWindow::on_insertButton_clicked()
+{
+    if(elementType == elementServer){
+        auto element = getServerElement();
+        fillElement(0,element);
+        insertServerInSet(containerType, element);
+    } else {
+        auto element = getDateTimeElement();
+        fillElement(0,element);
+        insertDateTimeInSet(containerType, element);
+    }
+}
+
+void PerformSetWindow::insertServerInSet(containType _t, Server s){
+    if(_t == typeBalancedTree){
+         setSplayServer.insert(s);
+    }
+}
+
+void PerformSetWindow::insertDateTimeInSet(containType _t, date_time::DateTime s){
+    if(_t == typeBalancedTree){
+        setSplayDateTime.insert(s);
+    }
+}
+
+
+void PerformSetWindow::on_deleteButton_clicked()
+{
+    if(elementType == elementServer){
+        auto element = getServerElement();
+        fillElement(2,element);
+        deleteServerInSet(containerType, element);
+    } else {
+        auto element = getDateTimeElement();
+        fillElement(2,element);
+        deleteDateTimeInSet(containerType, element);
+    }
+}
+
+
+void PerformSetWindow::deleteServerInSet(containType _t, Server s){
+    if(_t == typeBalancedTree){
+         setSplayServer.erase(s);
+    }
+}
+
+void PerformSetWindow::deleteDateTimeInSet(containType _t, date_time::DateTime s){
+    if(_t == typeBalancedTree){
+        setSplayDateTime.erase(s);
+    }
+}
+
+
+
+

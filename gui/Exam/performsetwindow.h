@@ -33,6 +33,10 @@ private slots:
 
     void on_findButton_clicked();
 
+    void on_insertButton_clicked();
+
+    void on_deleteButton_clicked();
+
 private:
     Ui::PerformSetWindow *ui;
     void fillTable(int index);
@@ -46,6 +50,12 @@ private:
 
     bool findServerInSet(containType _t, Server elem);
     bool findDateTimeInSet(containType _t, date_time::DateTime elem);
+
+    void insertServerInSet(containType _t, Server elem);
+    void insertDateTimeInSet(containType _t, date_time::DateTime elem);
+
+    void deleteServerInSet(containType _t, Server elem);
+    void deleteDateTimeInSet(containType _t, date_time::DateTime elem);
 
 
 
