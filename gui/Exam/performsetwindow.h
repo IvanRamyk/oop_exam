@@ -9,8 +9,7 @@
 #include "../../src/structures/balanced_searched_trees/SplayTree.hpp"
 #include <QMainWindow>
 
-enum containType {typeList, typeBalancedTree, typeTable};
-enum elemType{elementServer, elementDateTime};
+#include "perform.h"
 
 namespace Ui {
 class PerformSetWindow;

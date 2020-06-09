@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_PerformContainerWindow_t {
-    QByteArrayData data[7];
-    char stringdata0[112];
+    QByteArrayData data[4];
+    char stringdata0[66];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,17 +32,13 @@ struct qt_meta_stringdata_PerformContainerWindow_t {
 static const qt_meta_stringdata_PerformContainerWindow_t qt_meta_stringdata_PerformContainerWindow = {
     {
 QT_MOC_LITERAL(0, 0, 22), // "PerformContainerWindow"
-QT_MOC_LITERAL(1, 23, 13), // "SetWindowShow"
-QT_MOC_LITERAL(2, 37, 0), // ""
-QT_MOC_LITERAL(3, 38, 21), // "on_backButton_clicked"
-QT_MOC_LITERAL(4, 60, 23), // "on_contentBox_activated"
-QT_MOC_LITERAL(5, 84, 5), // "index"
-QT_MOC_LITERAL(6, 90, 21) // "on_findButton_clicked"
+QT_MOC_LITERAL(1, 23, 19), // "ContainerWindowShow"
+QT_MOC_LITERAL(2, 43, 0), // ""
+QT_MOC_LITERAL(3, 44, 21) // "on_backButton_clicked"
 
     },
-    "PerformContainerWindow\0SetWindowShow\0"
-    "\0on_backButton_clicked\0on_contentBox_activated\0"
-    "index\0on_findButton_clicked"
+    "PerformContainerWindow\0ContainerWindowShow\0"
+    "\0on_backButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,7 +48,7 @@ static const uint qt_meta_data_PerformContainerWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,19 +56,15 @@ static const uint qt_meta_data_PerformContainerWindow[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x06 /* Public */,
+       1,    0,   24,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   35,    2, 0x08 /* Private */,
-       4,    1,   36,    2, 0x08 /* Private */,
-       6,    0,   39,    2, 0x08 /* Private */,
+       3,    0,   25,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void,
 
        0        // eod
@@ -84,22 +76,21 @@ void PerformContainerWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _
         auto *_t = static_cast<PerformContainerWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->SetWindowShow(); break;
+        case 0: _t->ContainerWindowShow(); break;
         case 1: _t->on_backButton_clicked(); break;
-        case 2: _t->on_contentBox_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 3: _t->on_findButton_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (PerformContainerWindow::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&PerformContainerWindow::SetWindowShow)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&PerformContainerWindow::ContainerWindowShow)) {
                 *result = 0;
                 return;
             }
         }
     }
+    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject PerformContainerWindow::staticMetaObject = { {
@@ -131,19 +122,19 @@ int PerformContainerWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 2)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 2;
     }
     return _id;
 }
 
 // SIGNAL 0
-void PerformContainerWindow::SetWindowShow()
+void PerformContainerWindow::ContainerWindowShow()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }

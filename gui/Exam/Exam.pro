@@ -23,12 +23,15 @@ SOURCES += \
     performcontainerwindow.cpp \
     performsetwindow.cpp \
     setwindow.cpp \
-    sortwindow.cpp
+    sortwindow.cpp \
+    ../../src/Date/Date.cpp \
+    ../../src/Server/Server.cpp \
 
 HEADERS += \
     containerwindow.h \
     displayelement.h \
     mainwindow.h \
+    perform.h \
     performcontainerwindow.h \
     performsetwindow.h \
     setwindow.h \

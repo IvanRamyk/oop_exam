@@ -21,15 +21,27 @@ void ContainerWindow::on_backButton_clicked()
 
 void ContainerWindow::on_tableButton_clicked()
 {
+    performContainerWindow = new PerformContainerWindow(typeTable);
+    connect(performContainerWindow, &PerformContainerWindow::ContainerWindowShow, this, &ContainerWindow::show);
 
+    this->close();
+    performContainerWindow->show();
 }
 
 void ContainerWindow::on_treeButton_clicked()
 {
+    performContainerWindow = new PerformContainerWindow(typeBalancedTree);
+    connect(performContainerWindow, &PerformContainerWindow::ContainerWindowShow, this, &ContainerWindow::show);
 
+    this->close();
+    performContainerWindow->show();
 }
 
 void ContainerWindow::on_listButton_clicked()
 {
+    performContainerWindow = new PerformContainerWindow(typeList);
+    connect(performContainerWindow, &PerformContainerWindow::ContainerWindowShow, this, &ContainerWindow::show);
 
+    this->close();
+    performContainerWindow->show();
 }

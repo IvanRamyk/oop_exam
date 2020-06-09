@@ -160,7 +160,7 @@ void PerformSetWindow::fillElement(int tableId, Server &s){
     std::vector<int> id = {1,2,3,4};
     ip::address aps(1,2,3,4);
     s.IP = aps;
-    s.data_center = table->takeItem(2,1)->text().toStdString();
+    s.data_center = table->item(1,0)->text().toStdString();
 }
 
 
@@ -179,11 +179,11 @@ void PerformSetWindow::fillElement(int tableId, date_time::DateTime& dt){
     }
     int names[6];
     for(int i  =0; i < 6; i++){
-        names[i] = table->takeItem(i,1)->text().toInt();
+        names[i] = table->item(i,1)->text().toInt();
         //check correct
     }
-    date_time::DateTime newdt(2001, date_time::Feb, 25, 7, 7, 0);
-    dt = newdt;
+    //date_time::DateTime newdt(2001, date_time::Feb, 25, 7, 7, 0);
+    //dt = newdt;
 }
 
 
@@ -194,15 +194,15 @@ void PerformSetWindow::on_findButton_clicked()
         fillElement(1,element);
         bool OK = findServerInSet(containerType, element);
         if(OK)
-            ui->foundIndicator->setText("Found!");
+            ui->foundIndicator->setText(QString::fromStdString(element.data_center));
         else
-            ui->foundIndicator->setText("Not found...");
+            ui->foundIndicator->setText(QString::fromStdString(element.data_center + "Not found..."));
     } else {
         auto element = getDateTimeElement();
         fillElement(1,element);
-        bool OK = findDateTimeInSet(containerType, element);
+        bool OK = findDateTimeInSet(containerType, element);//bool OK = findDateTimeInSet(containerType, element);
         if(OK)
-            ui->foundIndicator->setText("Found!");
+            ui->foundIndicator->setText(QString::fromStdString(element.to_string()));
         else
             ui->foundIndicator->setText("Not found...");
     }
@@ -226,7 +226,16 @@ void PerformSetWindow<setType, elemType>::on_findButton_clicked()
 
 bool PerformSetWindow::findServerInSet(containType _t, Server s){
     if(_t == typeBalancedTree){
-        return setSplayServer.count(s);
+     //   return setSplayServer.count(s);
+        return false;//setSplayServer.count(s);
+    }
+    return true;
+}
+
+bool PerformSetWindow::findDateTimeInSet(containType _t, date_time::DateTime s){
+    if(_t == typeBalancedTree){
+     //   return setSplayServer.count(s);
+        return false;//setSplayDateTime.count(s);
     }
     return true;
 }

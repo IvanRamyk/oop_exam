@@ -59,7 +59,9 @@ SOURCES       = ../Exam/containerwindow.cpp \
 		../Exam/performcontainerwindow.cpp \
 		../Exam/performsetwindow.cpp \
 		../Exam/setwindow.cpp \
-		../Exam/sortwindow.cpp moc_containerwindow.cpp \
+		../Exam/sortwindow.cpp \
+		../../src/Date/Date.cpp \
+		../../src/Server/Server.cpp moc_containerwindow.cpp \
 		moc_mainwindow.cpp \
 		moc_performcontainerwindow.cpp \
 		moc_performsetwindow.cpp \
@@ -73,6 +75,8 @@ OBJECTS       = containerwindow.o \
 		performsetwindow.o \
 		setwindow.o \
 		sortwindow.o \
+		Date.o \
+		Server.o \
 		moc_containerwindow.o \
 		moc_mainwindow.o \
 		moc_performcontainerwindow.o \
@@ -265,6 +269,7 @@ DIST          = /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/spec_pre.prf 
 		../Exam/Exam.pro ../Exam/containerwindow.h \
 		../Exam/displayelement.h \
 		../Exam/mainwindow.h \
+		../Exam/perform.h \
 		../Exam/performcontainerwindow.h \
 		../Exam/performsetwindow.h \
 		../Exam/setwindow.h \
@@ -275,7 +280,9 @@ DIST          = /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/spec_pre.prf 
 		../Exam/performcontainerwindow.cpp \
 		../Exam/performsetwindow.cpp \
 		../Exam/setwindow.cpp \
-		../Exam/sortwindow.cpp
+		../Exam/sortwindow.cpp \
+		../../src/Date/Date.cpp \
+		../../src/Server/Server.cpp
 QMAKE_TARGET  = Exam
 DESTDIR       = 
 TARGET        = Exam
@@ -671,8 +678,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Exam/containerwindow.h ../Exam/displayelement.h ../Exam/mainwindow.h ../Exam/performcontainerwindow.h ../Exam/performsetwindow.h ../Exam/setwindow.h ../Exam/sortwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Exam/containerwindow.cpp ../Exam/displayelement.cpp ../Exam/main.cpp ../Exam/mainwindow.cpp ../Exam/performcontainerwindow.cpp ../Exam/performsetwindow.cpp ../Exam/setwindow.cpp ../Exam/sortwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Exam/containerwindow.h ../Exam/displayelement.h ../Exam/mainwindow.h ../Exam/perform.h ../Exam/performcontainerwindow.h ../Exam/performsetwindow.h ../Exam/setwindow.h ../Exam/sortwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Exam/containerwindow.cpp ../Exam/displayelement.cpp ../Exam/main.cpp ../Exam/mainwindow.cpp ../Exam/performcontainerwindow.cpp ../Exam/performsetwindow.cpp ../Exam/setwindow.cpp ../Exam/sortwindow.cpp ../../src/Date/Date.cpp ../../src/Server/Server.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Exam/containerwindow.ui ../Exam/mainwindow.ui ../Exam/performcontainerwindow.ui ../Exam/performsetwindow.ui ../Exam/setwindow.ui ../Exam/sortwindow.ui $(DISTDIR)/
 
 
@@ -712,12 +719,7 @@ moc_containerwindow.cpp: ../Exam/containerwindow.h \
 		../Exam/performcontainerwindow.h \
 		../../src/Server/Server.hpp \
 		../../src/Date/Date.hpp \
-		../Exam/displayelement.h \
-		../../src/containers/Set/Set.hpp \
-		../../src/containers/Set/SetOperations.hpp \
-		../../src/structures/balanced_searched_trees/SplayTree.hpp \
-		../../src/structures/balanced_searched_trees/Tree.hpp \
-		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
+		../Exam/perform.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -838,6 +840,10 @@ moc_mainwindow.cpp: ../Exam/mainwindow.h \
 		../../src/containers/Set/SetOperations.hpp \
 		../../src/structures/balanced_searched_trees/SplayTree.hpp \
 		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.tpp \
+		../../src/structures/balanced_searched_trees/AVLTree.hpp \
+		../../src/structures/balanced_searched_trees/AVLTree.tpp \
 		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -945,6 +951,7 @@ moc_mainwindow.cpp: ../Exam/mainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
+		../Exam/perform.h \
 		../Exam/containerwindow.h \
 		../Exam/performcontainerwindow.h \
 		../Exam/sortwindow.h \
@@ -955,12 +962,7 @@ moc_mainwindow.cpp: ../Exam/mainwindow.h \
 moc_performcontainerwindow.cpp: ../Exam/performcontainerwindow.h \
 		../../src/Server/Server.hpp \
 		../../src/Date/Date.hpp \
-		../Exam/displayelement.h \
-		../../src/containers/Set/Set.hpp \
-		../../src/containers/Set/SetOperations.hpp \
-		../../src/structures/balanced_searched_trees/SplayTree.hpp \
-		../../src/structures/balanced_searched_trees/Tree.hpp \
-		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
+		../Exam/perform.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1079,6 +1081,10 @@ moc_performsetwindow.cpp: ../Exam/performsetwindow.h \
 		../../src/containers/Set/SetOperations.hpp \
 		../../src/structures/balanced_searched_trees/SplayTree.hpp \
 		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.tpp \
+		../../src/structures/balanced_searched_trees/AVLTree.hpp \
+		../../src/structures/balanced_searched_trees/AVLTree.tpp \
 		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1186,6 +1192,7 @@ moc_performsetwindow.cpp: ../Exam/performsetwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
+		../Exam/perform.h \
 		moc_predefs.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc
 	/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/build-Exam-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/Exam -I/home/sadoffnick/Qt/5.12.6/gcc_64/include -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Exam/performsetwindow.h -o moc_performsetwindow.cpp
@@ -1199,6 +1206,10 @@ moc_setwindow.cpp: ../Exam/setwindow.h \
 		../../src/containers/Set/SetOperations.hpp \
 		../../src/structures/balanced_searched_trees/SplayTree.hpp \
 		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.tpp \
+		../../src/structures/balanced_searched_trees/AVLTree.hpp \
+		../../src/structures/balanced_searched_trees/AVLTree.tpp \
 		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1306,6 +1317,7 @@ moc_setwindow.cpp: ../Exam/setwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
+		../Exam/perform.h \
 		moc_predefs.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc
 	/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/build-Exam-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/Exam -I/home/sadoffnick/Qt/5.12.6/gcc_64/include -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Exam/setwindow.h -o moc_setwindow.cpp
@@ -1466,12 +1478,7 @@ containerwindow.o: ../Exam/containerwindow.cpp ../Exam/containerwindow.h \
 		../Exam/performcontainerwindow.h \
 		../../src/Server/Server.hpp \
 		../../src/Date/Date.hpp \
-		../Exam/displayelement.h \
-		../../src/containers/Set/Set.hpp \
-		../../src/containers/Set/SetOperations.hpp \
-		../../src/structures/balanced_searched_trees/SplayTree.hpp \
-		../../src/structures/balanced_searched_trees/Tree.hpp \
-		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
+		../Exam/perform.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1618,6 +1625,10 @@ main.o: ../Exam/main.cpp ../Exam/mainwindow.h \
 		../../src/containers/Set/SetOperations.hpp \
 		../../src/structures/balanced_searched_trees/SplayTree.hpp \
 		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.tpp \
+		../../src/structures/balanced_searched_trees/AVLTree.hpp \
+		../../src/structures/balanced_searched_trees/AVLTree.tpp \
 		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1725,6 +1736,7 @@ main.o: ../Exam/main.cpp ../Exam/mainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
+		../Exam/perform.h \
 		../Exam/containerwindow.h \
 		../Exam/performcontainerwindow.h \
 		../Exam/sortwindow.h \
@@ -1747,6 +1759,10 @@ mainwindow.o: ../Exam/mainwindow.cpp ../Exam/mainwindow.h \
 		../../src/containers/Set/SetOperations.hpp \
 		../../src/structures/balanced_searched_trees/SplayTree.hpp \
 		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.tpp \
+		../../src/structures/balanced_searched_trees/AVLTree.hpp \
+		../../src/structures/balanced_searched_trees/AVLTree.tpp \
 		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1854,6 +1870,7 @@ mainwindow.o: ../Exam/mainwindow.cpp ../Exam/mainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
+		../Exam/perform.h \
 		../Exam/containerwindow.h \
 		../Exam/performcontainerwindow.h \
 		../Exam/sortwindow.h \
@@ -1882,12 +1899,7 @@ mainwindow.o: ../Exam/mainwindow.cpp ../Exam/mainwindow.h \
 performcontainerwindow.o: ../Exam/performcontainerwindow.cpp ../Exam/performcontainerwindow.h \
 		../../src/Server/Server.hpp \
 		../../src/Date/Date.hpp \
-		../Exam/displayelement.h \
-		../../src/containers/Set/Set.hpp \
-		../../src/containers/Set/SetOperations.hpp \
-		../../src/structures/balanced_searched_trees/SplayTree.hpp \
-		../../src/structures/balanced_searched_trees/Tree.hpp \
-		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
+		../Exam/perform.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -2056,6 +2068,10 @@ performsetwindow.o: ../Exam/performsetwindow.cpp ../Exam/performsetwindow.h \
 		../../src/containers/Set/SetOperations.hpp \
 		../../src/structures/balanced_searched_trees/SplayTree.hpp \
 		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.tpp \
+		../../src/structures/balanced_searched_trees/AVLTree.hpp \
+		../../src/structures/balanced_searched_trees/AVLTree.tpp \
 		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -2163,6 +2179,7 @@ performsetwindow.o: ../Exam/performsetwindow.cpp ../Exam/performsetwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
+		../Exam/perform.h \
 		ui_performsetwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/QVariant \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QApplication \
@@ -2219,6 +2236,10 @@ setwindow.o: ../Exam/setwindow.cpp ../Exam/setwindow.h \
 		../../src/containers/Set/SetOperations.hpp \
 		../../src/structures/balanced_searched_trees/SplayTree.hpp \
 		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.hpp \
+		../../src/structures/balanced_searched_trees/BPlusTree.tpp \
+		../../src/structures/balanced_searched_trees/AVLTree.hpp \
+		../../src/structures/balanced_searched_trees/AVLTree.tpp \
 		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -2326,6 +2347,7 @@ setwindow.o: ../Exam/setwindow.cpp ../Exam/setwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
+		../Exam/perform.h \
 		ui_setwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/QVariant \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QApplication \
@@ -2482,6 +2504,12 @@ sortwindow.o: ../Exam/sortwindow.cpp ../Exam/sortwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qstatusbar.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sortwindow.o ../Exam/sortwindow.cpp
+
+Date.o: ../../src/Date/Date.cpp ../../src/Date/Date.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Date.o ../../src/Date/Date.cpp
+
+Server.o: ../../src/Server/Server.cpp ../../src/Server/Server.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Server.o ../../src/Server/Server.cpp
 
 moc_containerwindow.o: moc_containerwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_containerwindow.o moc_containerwindow.cpp

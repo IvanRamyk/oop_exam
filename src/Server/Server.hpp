@@ -6,6 +6,7 @@
 #define OOP_EXAM_SERVER_HPP
 
 
+
 #include <string>
 #include <utility>
 #include <vector>
@@ -41,8 +42,6 @@ public:
     friend bool operator ==(const Server& A, const Server& B);
     friend bool operator !=(const Server& A, const Server& B);
 };
-
-bool operator==(Server a, Server b);
 
 
 #endif //OOP_EXAM_SERVER_HPP
