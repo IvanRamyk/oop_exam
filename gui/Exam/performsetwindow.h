@@ -7,6 +7,7 @@
 #include "displayelement.h"
 #include "../../src/containers/Set/Set.hpp"
 #include "../../src/structures/balanced_searched_trees/SplayTree.hpp"
+#include "../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp"
 #include <QMainWindow>
 
 #include "perform.h"

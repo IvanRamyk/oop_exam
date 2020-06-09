@@ -7,6 +7,7 @@
 
 #include <iostream>
 
+
 template <typename T>
 struct SingleLinkedNode {
     T _value;
