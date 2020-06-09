@@ -1,6 +1,7 @@
 #ifndef CONTAINERWINDOW_H
 #define CONTAINERWINDOW_H
 
+#include "performcontainerwindow.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -29,6 +30,7 @@ private slots:
 
 private:
     Ui::ContainerWindow *ui;
+    PerformContainerWindow *performContainerWindow;
 };
 
 #endif // CONTAINERWINDOW_H

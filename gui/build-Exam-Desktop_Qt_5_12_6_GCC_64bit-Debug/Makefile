@@ -56,10 +56,12 @@ SOURCES       = ../Exam/containerwindow.cpp \
 		../Exam/displayelement.cpp \
 		../Exam/main.cpp \
 		../Exam/mainwindow.cpp \
+		../Exam/performcontainerwindow.cpp \
 		../Exam/performsetwindow.cpp \
 		../Exam/setwindow.cpp \
 		../Exam/sortwindow.cpp moc_containerwindow.cpp \
 		moc_mainwindow.cpp \
+		moc_performcontainerwindow.cpp \
 		moc_performsetwindow.cpp \
 		moc_setwindow.cpp \
 		moc_sortwindow.cpp
@@ -67,11 +69,13 @@ OBJECTS       = containerwindow.o \
 		displayelement.o \
 		main.o \
 		mainwindow.o \
+		performcontainerwindow.o \
 		performsetwindow.o \
 		setwindow.o \
 		sortwindow.o \
 		moc_containerwindow.o \
 		moc_mainwindow.o \
+		moc_performcontainerwindow.o \
 		moc_performsetwindow.o \
 		moc_setwindow.o \
 		moc_sortwindow.o
@@ -261,12 +265,14 @@ DIST          = /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/spec_pre.prf 
 		../Exam/Exam.pro ../Exam/containerwindow.h \
 		../Exam/displayelement.h \
 		../Exam/mainwindow.h \
+		../Exam/performcontainerwindow.h \
 		../Exam/performsetwindow.h \
 		../Exam/setwindow.h \
 		../Exam/sortwindow.h ../Exam/containerwindow.cpp \
 		../Exam/displayelement.cpp \
 		../Exam/main.cpp \
 		../Exam/mainwindow.cpp \
+		../Exam/performcontainerwindow.cpp \
 		../Exam/performsetwindow.cpp \
 		../Exam/setwindow.cpp \
 		../Exam/sortwindow.cpp
@@ -278,7 +284,7 @@ TARGET        = Exam
 first: all
 ####### Build rules
 
-Exam: ui_containerwindow.h ui_mainwindow.h ui_performsetwindow.h ui_setwindow.h ui_sortwindow.h $(OBJECTS)  
+Exam: ui_containerwindow.h ui_mainwindow.h ui_performcontainerwindow.h ui_performsetwindow.h ui_setwindow.h ui_sortwindow.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../Exam/Exam.pro /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.conf /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/spec_pre.prf \
@@ -665,9 +671,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Exam/containerwindow.h ../Exam/displayelement.h ../Exam/mainwindow.h ../Exam/performsetwindow.h ../Exam/setwindow.h ../Exam/sortwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Exam/containerwindow.cpp ../Exam/displayelement.cpp ../Exam/main.cpp ../Exam/mainwindow.cpp ../Exam/performsetwindow.cpp ../Exam/setwindow.cpp ../Exam/sortwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Exam/containerwindow.ui ../Exam/mainwindow.ui ../Exam/performsetwindow.ui ../Exam/setwindow.ui ../Exam/sortwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../Exam/containerwindow.h ../Exam/displayelement.h ../Exam/mainwindow.h ../Exam/performcontainerwindow.h ../Exam/performsetwindow.h ../Exam/setwindow.h ../Exam/sortwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Exam/containerwindow.cpp ../Exam/displayelement.cpp ../Exam/main.cpp ../Exam/mainwindow.cpp ../Exam/performcontainerwindow.cpp ../Exam/performsetwindow.cpp ../Exam/setwindow.cpp ../Exam/sortwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Exam/containerwindow.ui ../Exam/mainwindow.ui ../Exam/performcontainerwindow.ui ../Exam/performsetwindow.ui ../Exam/setwindow.ui ../Exam/sortwindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -699,10 +705,19 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1y -Wall -W -dM -E -o moc_predefs.h /home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_containerwindow.cpp moc_mainwindow.cpp moc_performsetwindow.cpp moc_setwindow.cpp moc_sortwindow.cpp
+compiler_moc_header_make_all: moc_containerwindow.cpp moc_mainwindow.cpp moc_performcontainerwindow.cpp moc_performsetwindow.cpp moc_setwindow.cpp moc_sortwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_containerwindow.cpp moc_mainwindow.cpp moc_performsetwindow.cpp moc_setwindow.cpp moc_sortwindow.cpp
+	-$(DEL_FILE) moc_containerwindow.cpp moc_mainwindow.cpp moc_performcontainerwindow.cpp moc_performsetwindow.cpp moc_setwindow.cpp moc_sortwindow.cpp
 moc_containerwindow.cpp: ../Exam/containerwindow.h \
+		../Exam/performcontainerwindow.h \
+		../../src/Server/Server.hpp \
+		../../src/Date/Date.hpp \
+		../Exam/displayelement.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -931,10 +946,130 @@ moc_mainwindow.cpp: ../Exam/mainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
 		../Exam/containerwindow.h \
+		../Exam/performcontainerwindow.h \
 		../Exam/sortwindow.h \
 		moc_predefs.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc
 	/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/build-Exam-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/Exam -I/home/sadoffnick/Qt/5.12.6/gcc_64/include -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Exam/mainwindow.h -o moc_mainwindow.cpp
+
+moc_performcontainerwindow.cpp: ../Exam/performcontainerwindow.h \
+		../../src/Server/Server.hpp \
+		../../src/Date/Date.hpp \
+		../Exam/displayelement.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qglobal.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qconfig.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qtcore-config.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsysinfo.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qlogging.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qflags.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qatomic.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qmutex.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qnumeric.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qversiontagging.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtgui-config.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qwidget.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qnamespace.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qobject.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstring.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qchar.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qbytearray.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qrefcount.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qarraydata.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringliteral.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringview.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qlist.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qalgorithms.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qiterator.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qpair.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringlist.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qregexp.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcoreevent.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qmetatype.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qobject_impl.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qmargins.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qrect.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsize.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qpoint.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpalette.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qcolor.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qrgb.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qrgba64.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qbrush.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qvector.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qmatrix.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpolygon.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qregion.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qdatastream.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qiodevice.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qline.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtransform.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpainterpath.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qimage.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpixelformat.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpixmap.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qshareddata.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qhash.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qfont.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qfontinfo.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qcursor.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qkeysequence.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qevent.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qvariant.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qmap.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qdebug.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qtextstream.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qlocale.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qset.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qurl.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qurlquery.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qfile.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qfiledevice.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qvector2d.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
+		moc_predefs.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc
+	/home/sadoffnick/Qt/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/build-Exam-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/home/sadoffnick/Qt/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/sadoffnick/Documents/UNI/STUDY/University_Labs/semester_4/Exam/oop_exam/gui/Exam -I/home/sadoffnick/Qt/5.12.6/gcc_64/include -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui -I/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Exam/performcontainerwindow.h -o moc_performcontainerwindow.cpp
 
 moc_performsetwindow.cpp: ../Exam/performsetwindow.h \
 		../../src/Server/Server.hpp \
@@ -1290,9 +1425,9 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_containerwindow.h ui_mainwindow.h ui_performsetwindow.h ui_setwindow.h ui_sortwindow.h
+compiler_uic_make_all: ui_containerwindow.h ui_mainwindow.h ui_performcontainerwindow.h ui_performsetwindow.h ui_setwindow.h ui_sortwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_containerwindow.h ui_mainwindow.h ui_performsetwindow.h ui_setwindow.h ui_sortwindow.h
+	-$(DEL_FILE) ui_containerwindow.h ui_mainwindow.h ui_performcontainerwindow.h ui_performsetwindow.h ui_setwindow.h ui_sortwindow.h
 ui_containerwindow.h: ../Exam/containerwindow.ui \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/bin/uic
 	/home/sadoffnick/Qt/5.12.6/gcc_64/bin/uic ../Exam/containerwindow.ui -o ui_containerwindow.h
@@ -1300,6 +1435,10 @@ ui_containerwindow.h: ../Exam/containerwindow.ui \
 ui_mainwindow.h: ../Exam/mainwindow.ui \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/bin/uic
 	/home/sadoffnick/Qt/5.12.6/gcc_64/bin/uic ../Exam/mainwindow.ui -o ui_mainwindow.h
+
+ui_performcontainerwindow.h: ../Exam/performcontainerwindow.ui \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/bin/uic
+	/home/sadoffnick/Qt/5.12.6/gcc_64/bin/uic ../Exam/performcontainerwindow.ui -o ui_performcontainerwindow.h
 
 ui_performsetwindow.h: ../Exam/performsetwindow.ui \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/bin/uic
@@ -1324,6 +1463,15 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 ####### Compile
 
 containerwindow.o: ../Exam/containerwindow.cpp ../Exam/containerwindow.h \
+		../Exam/performcontainerwindow.h \
+		../../src/Server/Server.hpp \
+		../../src/Date/Date.hpp \
+		../Exam/displayelement.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1578,6 +1726,7 @@ main.o: ../Exam/main.cpp ../Exam/mainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
 		../Exam/containerwindow.h \
+		../Exam/performcontainerwindow.h \
 		../Exam/sortwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QApplication \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qapplication.h \
@@ -1706,6 +1855,7 @@ mainwindow.o: ../Exam/mainwindow.cpp ../Exam/mainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
 		../Exam/containerwindow.h \
+		../Exam/performcontainerwindow.h \
 		../Exam/sortwindow.h \
 		ui_mainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/QVariant \
@@ -1728,6 +1878,175 @@ mainwindow.o: ../Exam/mainwindow.cpp ../Exam/mainwindow.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qstatusbar.h \
 		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Exam/mainwindow.cpp
+
+performcontainerwindow.o: ../Exam/performcontainerwindow.cpp ../Exam/performcontainerwindow.h \
+		../../src/Server/Server.hpp \
+		../../src/Date/Date.hpp \
+		../Exam/displayelement.h \
+		../../src/containers/Set/Set.hpp \
+		../../src/containers/Set/SetOperations.hpp \
+		../../src/structures/balanced_searched_trees/SplayTree.hpp \
+		../../src/structures/balanced_searched_trees/Tree.hpp \
+		../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qglobal.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qconfig.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qtcore-config.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsysinfo.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qlogging.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qflags.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qatomic.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qmutex.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qnumeric.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qversiontagging.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtgui-config.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qwidget.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qnamespace.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qobject.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstring.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qchar.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qbytearray.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qrefcount.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qarraydata.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringliteral.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringview.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qlist.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qalgorithms.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qiterator.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qpair.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringlist.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qregexp.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcoreevent.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qmetatype.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qobject_impl.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qmargins.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qrect.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsize.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qpoint.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpalette.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qcolor.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qrgb.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qrgba64.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qbrush.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qvector.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qmatrix.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpolygon.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qregion.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qdatastream.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qiodevice.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qline.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtransform.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpainterpath.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qimage.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpixelformat.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpixmap.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qshareddata.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qhash.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qfont.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qfontinfo.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qcursor.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qkeysequence.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qevent.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qvariant.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qmap.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qdebug.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qtextstream.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qlocale.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qset.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qurl.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qurlquery.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qfile.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qfiledevice.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qvector2d.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qicon.h \
+		ui_performcontainerwindow.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/QVariant \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QApplication \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qapplication.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qeventloop.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qguiapplication.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qinputmethod.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QComboBox \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qcombobox.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qvalidator.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qregularexpression.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qslider.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qstyle.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qframe.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QFrame \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QHeaderView \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QLabel \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qlabel.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QMenuBar \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qmenu.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qaction.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QPushButton \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QStatusBar \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QTableWidget \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtablewidget.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtableview.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QTextEdit \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/qtextedit.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtextdocument.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtextoption.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtextcursor.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qtextformat.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtGui/qpen.h \
+		/home/sadoffnick/Qt/5.12.6/gcc_64/include/QtWidgets/QWidget
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o performcontainerwindow.o ../Exam/performcontainerwindow.cpp
 
 performsetwindow.o: ../Exam/performsetwindow.cpp ../Exam/performsetwindow.h \
 		../../src/Server/Server.hpp \
@@ -2169,6 +2488,9 @@ moc_containerwindow.o: moc_containerwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_performcontainerwindow.o: moc_performcontainerwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_performcontainerwindow.o moc_performcontainerwindow.cpp
 
 moc_performsetwindow.o: moc_performsetwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_performsetwindow.o moc_performsetwindow.cpp

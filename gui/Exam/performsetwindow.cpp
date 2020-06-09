@@ -160,8 +160,7 @@ void PerformSetWindow::fillElement(int tableId, Server &s){
     std::vector<int> id = {1,2,3,4};
     ip::address aps(1,2,3,4);
     s.IP = aps;
-    s.id = table->takeItem(1,3)->text().toInt();
-    s.rack = new Rack("", nullptr);
+    s.data_center = table->takeItem(2,1)->text().toStdString();
 }
 
 

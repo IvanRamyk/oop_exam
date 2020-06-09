@@ -3,3 +3,8 @@
 //
 
 #include "Server.hpp"
+
+bool operator==(Server a, Server b){
+    return (a.data_center == b.data_center) &&
+    		(a.rack == b.rack)
+}

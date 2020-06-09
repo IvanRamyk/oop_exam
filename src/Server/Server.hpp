@@ -39,5 +39,7 @@ public:
     explicit Server(ip::address _IP, int _id = -1, std::string _rack = "", std::string center = ""): IP(std::move(_IP)), data_center(center), rack(_rack) {};
 };
 
+bool operator==(Server a, Server b);
+
 
 #endif //OOP_EXAM_SERVER_HPP

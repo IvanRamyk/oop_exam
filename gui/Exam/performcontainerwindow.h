@@ -1,6 +1,5 @@
-
-#ifndef PERFORMSETWINDOW_H
-#define PERFORMSETWINDOW_H
+#ifndef PERFORMCONTAINERWINDOW_H
+#define PERFORMCONTAINERWINDOW_H
 
 #include "../../src/Server/Server.hpp"
 #include "../../src/Date/Date.hpp"
@@ -9,20 +8,18 @@
 #include "../../src/structures/balanced_searched_trees/SplayTree.hpp"
 #include <QMainWindow>
 
-enum containType {typeList, typeBalancedTree, typeTable};
-enum elemType{elementServer, elementDateTime};
 
 namespace Ui {
-class PerformSetWindow;
+class PerformContainerWindow;
 }
 
-class PerformSetWindow : public QMainWindow
+class PerformContainerWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit PerformSetWindow(containType _type, QWidget *parent = nullptr);
-    ~PerformSetWindow();
+    explicit PerformContainerWindow(QWidget *parent = nullptr);
+    ~PerformContainerWindow();
 
 signals:
     void SetWindowShow();
@@ -35,21 +32,21 @@ private slots:
     void on_findButton_clicked();
 
 private:
-    Ui::PerformSetWindow *ui;
+    Ui::PerformContainerWindow *ui;
     void fillTable(int index);
     void fillElement(int tableId, Server& s);
     void fillElement(int tableId, date_time::DateTime& dt);
-    containType containerType;
-    elemType elementType;
+    //containType containerType;
+    //elemType elementType;
 
     Server getServerElement();
     date_time::DateTime getDateTimeElement();
 
-    bool findServerInSet(containType _t, Server elem);
-    bool findDateTimeInSet(containType _t, date_time::DateTime elem);
+    //bool findServerInSet(containType _t, Server elem);
+    //bool findDateTimeInSet(containType _t, date_time::DateTime elem);
 
 
 
 };
 
-#endif // PERFORMSETWINDOW_H
+#endif // PERFORMCONTAINERWINDOW_H

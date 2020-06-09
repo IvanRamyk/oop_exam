@@ -20,6 +20,7 @@ SOURCES += \
     displayelement.cpp \
     main.cpp \
     mainwindow.cpp \
+    performcontainerwindow.cpp \
     performsetwindow.cpp \
     setwindow.cpp \
     sortwindow.cpp
@@ -28,6 +29,7 @@ HEADERS += \
     containerwindow.h \
     displayelement.h \
     mainwindow.h \
+    performcontainerwindow.h \
     performsetwindow.h \
     setwindow.h \
     sortwindow.h
@@ -35,6 +37,7 @@ HEADERS += \
 FORMS += \
     containerwindow.ui \
     mainwindow.ui \
+    performcontainerwindow.ui \
     performsetwindow.ui \
     setwindow.ui \
     sortwindow.ui
