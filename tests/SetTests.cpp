@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include "../src/containers/Set/Set.hpp"
 #include "../src/Date/Date.hpp"
+#include "../src/Server/Server.hpp"
 
 
 TEST(Set, SplayTreeImpl) {
@@ -217,4 +218,10 @@ TEST(Set, withDateAndTime) {
 
     Set<SingleLinkedOrderedList<date_time::DateTime>> forDateTime;
     forDateTime.insert(date_time::DateTime(2001, date_time::Feb, 25, 7, 7, 0));
+}
+
+TEST(Set, withServer) {
+
+    Set<SingleLinkedOrderedList<Server>> forServer;
+    forServer.insert(Server(ip::address(1,1,1,1)));
 }

@@ -26,7 +26,7 @@ namespace ip {
 
 
     };
-    std::ostream& operator<<(std::ostream& os, const address& IP)
+    inline std::ostream& operator<<(std::ostream& os, const address& IP)
     {
         os << IP.fields[0] << '.' << IP.fields[1] << '.' << IP.fields[2] << '.' << IP.fields[3];
         return os;
@@ -39,7 +39,11 @@ public:
     ip::address IP;
     std::string data_center;
     std::string rack;
-    explicit Server(ip::address _IP, int _id = -1, std::string _rack = "", std::string center = ""): IP(std::move(_IP)), data_center(center), rack(_rack) {};
+    explicit Server(ip::address _IP = ip::address(0,0,0,0), int _id = -1, std::string _rack = "", std::string center = ""): IP(std::move(_IP)), data_center(center), rack(_rack) {};
+    friend bool operator <(const Server& A, const Server& B);
+    friend bool operator >(const Server& A, const Server& B);
+    friend bool operator ==(const Server& A, const Server& B);
+    friend bool operator !=(const Server& A, const Server& B);
 };
 
 
