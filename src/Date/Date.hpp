@@ -56,6 +56,7 @@ namespace date_time {
         Time time;
     public:
         DateTime(int year = 1975, Month month = Month(0), int day = 0, int hours = 0, int minutes = 0, int seconds = 0);
+        DateTime(Date _date, Time _time): date(_date), time(_time) {}
         std::string to_string() const;
         friend bool operator <(DateTime A, DateTime B);
         friend bool operator >(DateTime A, DateTime B);
