@@ -9,13 +9,16 @@
 
 template <typename T>
 struct SingleLinkedNode {
-    T value;
+    T _value;
     SingleLinkedNode<T> * next;
     SingleLinkedNode() {
         next = nullptr;
     }
     explicit SingleLinkedNode(T _data) {
-        value = _data;
+        _value = _data;
+    }
+    T value(){
+        return _value;
     }
 };
 
@@ -25,15 +28,15 @@ class SingleLinkedOrderedList {
 private:
     SingleLinkedNode<T> * head;
     SingleLinkedNode<T> * tail;
-    int cnt_nodes{};
 public:
+    using value_type = T;
     SingleLinkedOrderedList() {
         head = tail = nullptr;
     }
     void print() {
         auto cur = head;
         while (cur != nullptr) {
-            std::cout << cur->value << " ";
+            std::cout << cur->_value << " ";
             cur = cur->next;
         }
         std::cout << "\n";
@@ -44,22 +47,35 @@ public:
             return;
         }
         auto node = new SingleLinkedNode<T>(data);
-        if (data < head->value) {
+        if (data < head->_value) {
             node->next = head;
             head = node;
             return;
         }
         auto cur = head;
-        while (cur->value < data) {
-
+        auto prev = new SingleLinkedNode<T>;
+        while (cur != nullptr && cur->_value < data) {
+            prev = cur;
+            cur = cur->next;
         }
-
+        if (cur == nullptr) {
+            prev->next = node;
+            tail = node;
+            return;
+        }
+        if (cur->_value == data) {
+            cur->_value = data;
+            delete node;
+        }
+        auto temp = prev->next;
+        prev->next =node;
+        node->next = temp;
 
     }
+
     void pop_back() {
         if (head == nullptr)
             return;
-        cnt_nodes--;
         if (head == tail)
             head = tail = nullptr;
         else {
@@ -69,51 +85,57 @@ public:
             auto temp = tail;
             tail = node;
             tail->next = nullptr;
-            delete temp;
+            //delete temp;
         }
     }
     void pop_front() {
         if (head == nullptr)
             return;
-        cnt_nodes--;
         if (head == tail)
             head = tail = nullptr;
         else {
             auto temp = head;
             head = head->next;
-            delete temp;
+            //delete temp;
         }
     }
-    void erase(int pos) {
-        if (pos >= cnt_nodes)
-            return;
-        if (pos == 0)
+
+    void erase(T value) {
+        auto cur = head;
+        auto prev = new SingleLinkedNode<T>;
+        while (cur != nullptr && !(cur->_value == value)) {
+            prev = cur;
+            cur = cur->next;
+        }
+        if (cur == head)
             pop_front();
-        else if (pos == cnt_nodes - 1)
+        if (cur == tail)
             pop_back();
-        else {
-            cnt_nodes--;
-            auto prev = new SingleLinkedNode<T>;
-            auto node = head;
-            for (int i = 0; i < pos; ++i) {
-                prev = node;
-                node = node->next;
-            }
-            prev->next = node->next;
-            delete node;
+        if (cur != nullptr) {
+            prev->next = cur->next;
+            //delete cur;
         }
     }
 
-    T select(int pos) {
+    SingleLinkedNode<T> * search(T value) {
         auto node = head;
-        for (int i = 0; i < pos; ++i)
-            node = node->next;
-        return node->value;
+        while (node != nullptr)
+            if (node->_value == value)
+                break;
+            else node = node->next;
+        return node;
     }
 
-    int size() {
-        return cnt_nodes;
+    std::vector <T> elements() {
+        std::vector <T> res;
+        auto node = head;
+        while (node != nullptr) {
+            res.push_back(node->value());
+            node = node->next;
+        }
+        return res;
     }
+
 };
 
 #endif //OOP_EXAM_SINGLELINKEDORDEREDLIST_HPP

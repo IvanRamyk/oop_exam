@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 #include "../src/structures/lists/SingleLinkedList/SingleLinkedList.hpp"
-
+#include <vector>
 
 TEST(SingleLinled, withInt) {
     SingleLinkedList<int> list;
@@ -19,6 +19,4 @@ TEST(SingleLinled, withInt) {
         EXPECT_EQ(i, list.select(i));
     for (int i = 2; i < 5; ++i)
         EXPECT_EQ(i + 5, list.select(i));
-
-
 }
