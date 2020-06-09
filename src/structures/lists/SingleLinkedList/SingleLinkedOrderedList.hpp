@@ -8,14 +8,15 @@
 #include <iostream>
 
 template <typename T>
-struct SingleLinkedNode {
+struct SingleLinkedOrderedNode {
     T _value;
-    SingleLinkedNode<T> * next;
-    SingleLinkedNode() {
+    SingleLinkedOrderedNode<T> * next;
+    SingleLinkedOrderedNode() {
         next = nullptr;
     }
-    explicit SingleLinkedNode(T _data) {
+    explicit SingleLinkedOrderedNode(T _data) {
         _value = _data;
+        next = nullptr;
     }
     T value(){
         return _value;
@@ -26,8 +27,8 @@ template <typename T>
 class SingleLinkedOrderedList {
 
 private:
-    SingleLinkedNode<T> * head;
-    SingleLinkedNode<T> * tail;
+    SingleLinkedOrderedNode<T> * head;
+    SingleLinkedOrderedNode<T> * tail;
 public:
     using value_type = T;
     SingleLinkedOrderedList() {
@@ -43,17 +44,17 @@ public:
     }
     void insert(T data) {
         if (head == nullptr) {
-            head = new SingleLinkedNode<T>(data);
+            head = new SingleLinkedOrderedNode<T>(data);
             return;
         }
-        auto node = new SingleLinkedNode<T>(data);
+        auto node = new SingleLinkedOrderedNode<T>(data);
         if (data < head->_value) {
             node->next = head;
             head = node;
             return;
         }
         auto cur = head;
-        auto prev = new SingleLinkedNode<T>;
+        auto prev = new SingleLinkedOrderedNode<T>;
         while (cur != nullptr && cur->_value < data) {
             prev = cur;
             cur = cur->next;
@@ -102,7 +103,7 @@ public:
 
     void erase(T value) {
         auto cur = head;
-        auto prev = new SingleLinkedNode<T>;
+        auto prev = new SingleLinkedOrderedNode<T>;
         while (cur != nullptr && !(cur->_value == value)) {
             prev = cur;
             cur = cur->next;
@@ -117,12 +118,13 @@ public:
         }
     }
 
-    SingleLinkedNode<T> * search(T value) {
+    SingleLinkedOrderedNode<T> * search(T value) {
         auto node = head;
-        while (node != nullptr)
+        while (node != nullptr) {
             if (node->_value == value)
                 break;
             else node = node->next;
+        }
         return node;
     }
 

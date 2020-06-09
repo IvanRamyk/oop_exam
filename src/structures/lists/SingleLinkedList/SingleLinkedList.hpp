@@ -16,6 +16,7 @@ struct SingleLinkedNode {
     }
     explicit SingleLinkedNode(T _data) {
         data = _data;
+        next = nullptr;
     }
 };
 

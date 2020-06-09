@@ -5,7 +5,6 @@
 #ifndef ALGORITHMS_SPLAYTREE_HPP
 #define ALGORITHMS_SPLAYTREE_HPP
 
-#include "../../src/Server/Server.hpp"
 #include <vector>
 #include "Tree.hpp"
 
