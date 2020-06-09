@@ -65,6 +65,7 @@ class AVLTree {
     };
 
 public:
+    using value_type = Item;
     shared_ptr<AVLNode<Item>> search(Item);
 
     void insert(Item);
