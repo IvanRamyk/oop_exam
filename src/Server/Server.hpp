@@ -5,6 +5,8 @@
 #ifndef OOP_EXAM_SERVER_HPP
 #define OOP_EXAM_SERVER_HPP
 
+
+
 #include <string>
 #include <utility>
 #include <vector>
@@ -15,6 +17,8 @@ namespace ip {
     class address {
         std::vector<int> fields;
     public:
+
+        int field(int x) const;
         explicit address(int value1 = 0, int value2 = 0, int value3 = 0, int value4 = 0) {
             fields = {value1, value2, value3, value4};
         }
@@ -23,14 +27,10 @@ namespace ip {
             fields = {vls[0], vls[1], vls[2], vls[3]};
         }
         friend std::ostream& operator<<(std::ostream& os, const address& IP);
+        friend bool operator ==(const address& A, const address& B);
 
 
     };
-    inline std::ostream& operator<<(std::ostream& os, const address& IP)
-    {
-        os << IP.fields[0] << '.' << IP.fields[1] << '.' << IP.fields[2] << '.' << IP.fields[3];
-        return os;
-    }
 
 }
 
@@ -39,6 +39,7 @@ public:
     ip::address IP;
     std::string data_center;
     std::string rack;
+    std::string company;
     explicit Server(ip::address _IP = ip::address(0,0,0,0), int _id = -1, std::string _rack = "", std::string center = ""): IP(std::move(_IP)), data_center(center), rack(_rack) {};
     friend bool operator <(const Server& A, const Server& B);
     friend bool operator >(const Server& A, const Server& B);

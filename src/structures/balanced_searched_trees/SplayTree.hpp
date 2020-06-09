@@ -5,6 +5,7 @@
 #ifndef ALGORITHMS_SPLAYTREE_HPP
 #define ALGORITHMS_SPLAYTREE_HPP
 
+#include "../../src/Server/Server.hpp"
 #include <vector>
 #include "Tree.hpp"
 
@@ -33,7 +34,7 @@ public:
 };
 
 template <typename TreeItem>
-class SplayTree: public Tree<TreeItem> {
+class SplayTree: public Tree <TreeItem> {
 private:
     SplayTreeNode <TreeItem> * _root;
 
