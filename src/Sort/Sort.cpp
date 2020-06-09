@@ -4,6 +4,8 @@
 
 #include "Sort.h"
 
+#include <map>
+
 
 template<class T>
 Sort<T>::Sort(const std::vector<T>& data) {
@@ -86,5 +88,60 @@ void Sort<T>::mergePart(std::vector<T>& vec, std::vector<T>& temp, const std::fu
                   std::min(i + 2 * width, (int)vec.size()), temp, compare);
         }
         vec = temp;
+    }
+}
+
+template<class T>
+void Sort<T>::countingSort(const std::function<bool(T, T)> &compare) {
+}
+
+template<class T>
+void Sort<T>::insertionSort(const std::function<bool(T, T)> &compare) {
+    for (int i = 1; i < _data.size(); ++i) {
+        for (int j = i - 1; j >= 0; --j) {
+            if (compare(_data[j], _data[j - 1])) {
+                std::swap(_data[j], _data[j - 1]);
+            } else {
+                break;
+            }
+        }
+    }
+}
+
+template<class T>
+void Sort<T>::quickSort(const std::function<bool(T, T)> &compare) {
+    quickPartSort(begin(_data), end(_data), compare);
+}
+
+template<class T>
+template<class iter>
+iter Sort<T>::partition(iter begin, iter end, const std::function<bool(T, T)> &compare) {
+    iter pivot = end - 1;
+    swap_iter(begin, pivot);
+
+    iter i = begin;
+    for (iter j = begin; j <= end - 2; j++) {
+        if (compare(*j, *pivot)) {
+            swap_iter(i, j);
+            auto temp = *i;
+            *i = *j;
+            *j = temp;
+            ++i;
+        }
+    }
+
+    iter new_pivot = i;
+    swap_iter(new_pivot, pivot);
+    return new_pivot;
+}
+
+
+template<class T>
+template<class iter>
+void Sort<T>::quickPartSort(iter begin, iter end, const std::function<bool(T, T)> &compare) {
+    if (begin < end) {
+        iter pivot = partition(begin, end, compare);
+        quickPartSort(begin, pivot);
+        quickPartSort(pivot + 1, end);
     }
 }

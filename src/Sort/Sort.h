@@ -18,6 +18,13 @@ public:
 
     void mergeSort(const std::function<bool(T, T)>& compare);
 
+    void countingSort(const std::function<bool(T, T)>& compare); //TODO
+
+    void insertionSort(const std::function<bool(T, T)>& compare);
+
+    void quickSort(const std::function<bool(T, T)>& compare);
+
+
     std::vector<T> getData() const;
 private:
     std::vector<T> _data;
@@ -25,6 +32,12 @@ private:
     void merge(std::vector<T>& vec, int iLeft, int iRight, int iEnd, std::vector<T>& temp, const std::function<bool(T, T)> &compare);
 
     void mergePart(std::vector<T>& vec, std::vector<T>& temp, const std::function<bool(T, T)> &compare);
+
+    template <class iter>
+    void quickPartSort(iter begin, iter end, const std::function<bool(T, T)> &compare);
+
+    template <class iter>
+    iter partition(iter begin, iter end, const std::function<bool(T, T)> &compare);
 };
 
 
