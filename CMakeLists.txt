@@ -14,6 +14,6 @@ add_executable(oop_exam main.cpp src/Server/Server.cpp src/Server/Server.hpp src
         src/Date/Date.hpp tests/DateTimeTests.cpp src/structures/lists/SingleLinkedList/SingleLinkedList.hpp
         tests/SingleLinkedListTests.cpp src/containers/Set/Set.hpp src/containers/Set/SetOperations.hpp tests/SetTests.cpp
         src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp src/containers/Map/Map.hpp tests/MapTests.cpp
-        src/Date/Date.cpp)
+        src/Date/Date.cpp src/Sort/Sort.cpp src/Sort/Sort.h)
 
 target_link_libraries(oop_exam gtest gtest_main)
