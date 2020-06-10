@@ -5,12 +5,19 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include "../src/Sort/Sort.h"
+#include "../src/Server/Server.hpp"
 #include <functional>
 
 TEST(Sort, selectionSort) {
     std::vector<int> vec = {1, 9, 6, 4, 2, 3, 5, 7, 8, 0};
     std::vector<int> sorted = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     Sort<int> sort(vec);
+    std::vector<Server> servs;
+    servs.push_back(Server(ip::address(1,1,1,1)));
+    servs.push_back(Server(ip::address(1,2,1,1)));
+    servs.push_back(Server(ip::address(1,2,1,1), 2, "asd", "asd"));
+    Sort<Server> newSort(servs);
+    newSort.selectionSort([](Server lhs, Server rhs){ return true;});
     std::function<bool(int, int)> f = [](int lhs, int rhs){ return  lhs < rhs;};
     sort.selectionSort(f);
     auto res = sort.getData();
