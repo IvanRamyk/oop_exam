@@ -1,4 +1,5 @@
 //
+//
 // Created by ivan on 08.06.20.
 //
 
@@ -15,60 +16,60 @@
 template <typename Structure>
 struct SetOperations;
 
-template <typename T>
-struct SetOperations <SplayTree<T>> {
+template <typename T, class C>
+struct SetOperations <SplayTree<T, C>> {
     using value_type = typename SplayTree<T>::value_type;
-    static auto insert (SplayTree<T>& container, const value_type& value)
+    static auto insert (SplayTree<T, C>& container, const value_type& value)
     {
         container.insert(value);
     }
 
-    static auto count(SplayTree<T>& container, const value_type& value)
+    static auto count(SplayTree<T, C>& container, const value_type& value)
     {
         auto c = container.search(value);
         return c != nullptr;
     }
 
-    static auto search(SplayTree<T>& container, const value_type& value)
+    static auto search(SplayTree<T, C>& container, const value_type& value)
     {
         return container.search(value);
     }
 
-    static auto erase(SplayTree<T>& container, const value_type& value)
+    static auto erase(SplayTree<T, C>& container, const value_type& value)
     {
         container.remove(container.search(value));
     }
 
-    static auto elements(SplayTree<T>& container)
+    static auto elements(SplayTree<T, C>& container)
     {
         return container.elements();
     }
 };
 
-template <typename T>
-struct SetOperations <SingleLinkedOrderedList<T>> {
+template <typename T, typename C>
+struct SetOperations <SingleLinkedOrderedList<T, C>> {
     using value_type = typename SingleLinkedOrderedList<T>::value_type;
-    static auto insert (SingleLinkedOrderedList<T>& container, const value_type& value)
+    static auto insert (SingleLinkedOrderedList<T, C>& container, const value_type& value)
     {
         container.insert(value);
     }
 
-    static auto count(SingleLinkedOrderedList<T>& container, const value_type& value)
+    static auto count(SingleLinkedOrderedList<T, C>& container, const value_type& value)
     {
         return container.search(value) != nullptr;
     }
 
-    static auto search(SingleLinkedOrderedList<T>& container, const value_type& value)
+    static auto search(SingleLinkedOrderedList<T, C>& container, const value_type& value)
     {
         return container.search(value);
     }
 
-    static auto erase(SingleLinkedOrderedList<T>& container, const value_type& value)
+    static auto erase(SingleLinkedOrderedList<T, C>& container, const value_type& value)
     {
         container.erase(value);
     }
 
-    static auto elements(SingleLinkedOrderedList<T>& container)
+    static auto elements(SingleLinkedOrderedList<T, C>& container)
     {
         return container.elements();
     }

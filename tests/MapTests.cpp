@@ -14,6 +14,7 @@ TEST(Map, MapSplayTree){
 
 }
 
+
 TEST(Map, MapList){
     Map <int, int, SingleLinkedOrderedList> map;
     map.insert(3, 4);

@@ -7,19 +7,18 @@
 
 #include "SetOperations.hpp"
 
+
 template <typename Structure>
 class Set {
 public:
+
     using value_type = typename Structure::value_type;
-private:
-public:
+    using Impl = SetOperations<Structure>;
 
     inline auto _elements()
     {
         return Impl::elements(_container);
     }
-    using Impl = SetOperations<Structure>;
-    Structure _container;
     inline auto insert(const value_type &value)
     {
         return Impl::insert(_container, value);
@@ -40,6 +39,8 @@ public:
         return Impl::erase(_container, value);
     }
 
+private:
+    Structure _container;
 };
 
 template <typename Structure>

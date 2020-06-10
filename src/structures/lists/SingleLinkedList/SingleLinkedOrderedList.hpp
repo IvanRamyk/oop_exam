@@ -25,6 +25,13 @@ struct SingleLinkedOrderedNode {
 };
 
 template <typename T>
+struct LinkComp {
+    bool operator()(T a,T b) {
+        return a < b;
+    }
+};
+
+template <typename T, typename C=LinkComp<T>>
 class SingleLinkedOrderedList {
 
 private:
@@ -49,14 +56,14 @@ public:
             return;
         }
         auto node = new SingleLinkedOrderedNode<T>(data);
-        if (data < head->_value) {
+        if (C()(data, head->_value)) {
             node->next = head;
             head = node;
             return;
         }
         auto cur = head;
         auto prev = new SingleLinkedOrderedNode<T>;
-        while (cur != nullptr && cur->_value < data) {
+        while (cur != nullptr && C()(cur->_value , data)) {
             prev = cur;
             cur = cur->next;
         }
@@ -65,7 +72,7 @@ public:
             tail = node;
             return;
         }
-        if (cur->_value == data) {
+        if (((!C()(cur->_value, data))) && (!C()(data, cur->_value))) {
             cur->_value = data;
             delete node;
         }
@@ -105,7 +112,7 @@ public:
     void erase(T value) {
         auto cur = head;
         auto prev = new SingleLinkedOrderedNode<T>;
-        while (cur != nullptr && !(cur->_value == value)) {
+        while (cur != nullptr && (C()(cur->_value, value) || C()(value, cur->_value))) {
             prev = cur;
             cur = cur->next;
         }
@@ -122,7 +129,7 @@ public:
     SingleLinkedOrderedNode<T> * search(T value) {
         auto node = head;
         while (node != nullptr) {
-            if (node->_value == value)
+            if (!(C()(node->_value, value) || C()(value, node->_value)))
                 break;
             else node = node->next;
         }

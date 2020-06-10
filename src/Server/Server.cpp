@@ -42,10 +42,24 @@ bool operator ==(const Server& A, const Server& B) {
             && A.company == B.company;
 }
 
+
 std::string ip::address::toString(){
 	std::string s = "";
 	for(int i = 0; i < fields.size()-1; i++)
 		s += std::to_string(fields[i]) + ".";
 	s += std::to_string(fields[fields.size()-1]);
     return s;
+
+
+int Server::toInt() const {
+    std::string hashString = data_center + rack + company;
+    const int p = 31;
+    const int m = 1e9 + 9;
+    int hash_value = 0;
+    int p_pow = 1;
+    for (char c : hashString) {
+        hash_value = (hash_value + (c - 'a' + 1) * p_pow) % m;
+        p_pow = (p_pow * p) % m;
+    }
+    return hash_value;
 }

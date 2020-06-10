@@ -26,6 +26,7 @@ namespace date_time {
 
     public:
         std::string to_string() const;
+        [[nodiscard]] int toInt() const;
 
         explicit Date(int _year = 0, Month _month = Month(0), int _day = 1975): year(_year), month(_month), day(_day){}
 
@@ -45,6 +46,7 @@ namespace date_time {
         explicit Time(int _hours = 0 , int _minutes = 0, int _sec = 0): hours(_hours), minutes(_minutes), seconds(_sec){}
 
         std::string to_string() const;
+        [[nodiscard]] int toInt() const;
 
         friend bool operator <(Time A, Time B);
         friend bool operator >(Time A, Time B);
@@ -62,6 +64,7 @@ namespace date_time {
         explicit DateTime(int year = 1975, Month month = Month(0), int day = 0, int hours = 0, int minutes = 0, int seconds = 0);
         DateTime(Date _date, Time _time): date(_date), time(_time) {}
         std::string to_string() const;
+        int toInt() const;
         friend bool operator <(DateTime A, DateTime B);
         friend bool operator >(DateTime A, DateTime B);
         friend bool operator ==(DateTime A, DateTime B);
