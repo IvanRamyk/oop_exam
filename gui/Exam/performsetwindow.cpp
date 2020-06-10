@@ -149,11 +149,7 @@ void PerformSetWindow::fillElement(int tableId, Server &s){
     }
 
     std::vector<int> id = {1,2,3,4};
-    ip::address aps(1,2,3,4);
-    s.IP = aps;
-    s.data_center = getName(table->item(1,1)).toStdString();
-    s.rack = getName(table->item(2,1)).toStdString();
-    s.company = getName(table->item(3,1)).toStdString();
+
 
 
 }

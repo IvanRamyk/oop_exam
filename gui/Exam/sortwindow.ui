@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1018</width>
+    <width>1123</width>
     <height>600</height>
    </rect>
   </property>
@@ -44,7 +44,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>140</y>
+      <y>90</y>
       <width>250</width>
       <height>203</height>
      </rect>
@@ -71,24 +71,6 @@
     </property>
     <property name="text">
      <string>Предметна область:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>90</y>
-      <width>100</width>
-      <height>40</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Key:</string>
     </property>
    </widget>
    <widget class="QComboBox" name="contentBox">
@@ -135,16 +117,6 @@
     </property>
     <property name="text">
      <string>Вставити елемент</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="insertKey">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>80</y>
-      <width>150</width>
-      <height>50</height>
-     </rect>
     </property>
    </widget>
    <widget class="QLabel" name="functionalLlabel">
@@ -210,7 +182,7 @@
      <rect>
       <x>360</x>
       <y>80</y>
-      <width>621</width>
+      <width>701</width>
       <height>411</height>
      </rect>
     </property>
@@ -221,7 +193,7 @@
     </column>
     <column>
      <property name="text">
-      <string>New Column</string>
+      <string>IP</string>
      </property>
     </column>
     <column>
@@ -240,13 +212,69 @@
      </property>
     </column>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>510</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сортувати за:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="sortingParamether">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>505</y>
+      <width>101</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>IP</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Дата центр</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Rack</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Company</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="sortButton">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>500</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сортувати!</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1018</width>
+     <width>1123</width>
      <height>22</height>
     </rect>
    </property>
