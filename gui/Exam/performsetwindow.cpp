@@ -5,6 +5,8 @@ Set<SplayTree<Server>> setSplayServer;
 Set<SplayTree<date_time::DateTime>> setSplayDateTime;
 Set<SingleLinkedOrderedList<Server>> set_SLO_List_Server;
 Set<SingleLinkedOrderedList<date_time::DateTime>> set_SLO_List_DateTime;
+CuckooHash<Server> setHashServer({Server{}});
+CuckooHash<date_time::DateTime> setHashDateTime({date_time::DateTime{}});
 
 
 
@@ -200,7 +202,6 @@ void PerformSetWindow::on_findButton_clicked()
 
 }
 
-
 bool PerformSetWindow::findServerInSet(containType _t, Server s){
     if(_t == typeBalancedTree){
         auto x = setSplayServer.count(s);
@@ -210,6 +211,9 @@ bool PerformSetWindow::findServerInSet(containType _t, Server s){
     }else if(_t == typeList){
         return set_SLO_List_Server.count(s);
     }
+    else{
+        return setHashServer.count(s);
+    }
     return true;
 }
 
@@ -218,6 +222,8 @@ bool PerformSetWindow::findDateTimeInSet(containType _t, date_time::DateTime s){
         return setSplayDateTime.count(s);
     }else if(_t == typeList){
         return set_SLO_List_DateTime.count(s);
+    }else{
+        return setHashDateTime.count(s);
     }
     return true;
 }
@@ -241,6 +247,8 @@ void PerformSetWindow::insertServerInSet(containType _t, Server s){
          setSplayServer.insert(s);
     }else if(_t == typeList){
         set_SLO_List_Server.insert(s);
+    }else{
+        setHashServer.add(s);
     }
 }
 
@@ -249,6 +257,8 @@ void PerformSetWindow::insertDateTimeInSet(containType _t, date_time::DateTime s
         setSplayDateTime.insert(s);
     }else if(_t == typeList){
         set_SLO_List_DateTime.insert(s);
+    }else{
+        setHashDateTime.add(s);
     }
 }
 
@@ -272,6 +282,8 @@ void PerformSetWindow::deleteServerInSet(containType _t, Server s){
          setSplayServer.erase(s);
     }else if(_t == typeList){
         set_SLO_List_Server.erase(s);
+    }else{
+        setHashServer.erase(s);
     }
 }
 
@@ -280,6 +292,8 @@ void PerformSetWindow::deleteDateTimeInSet(containType _t, date_time::DateTime s
         setSplayDateTime.erase(s);
     }else if(_t == typeList){
         set_SLO_List_DateTime.erase(s);
+    }else{
+        setHashDateTime.erase(s);
     }
 }
 
