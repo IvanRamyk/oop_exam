@@ -4,6 +4,8 @@
 
 #include "Date.hpp"
 
+#include <map>
+
 namespace date_time {
     std::ostream& operator<<(std::ostream& out, const DateTime time)
     {
@@ -46,6 +48,10 @@ namespace date_time {
 
     bool operator >(Time A, Time B) {
         return B < A;
+    }
+
+    int Time::toInt() const {
+        return hours*3600 + minutes*60 + seconds;
     }
 
     bool operator <(Date A, Date B) {
@@ -103,6 +109,11 @@ namespace date_time {
         return B < A;
     }
 
+    int Date::toInt() const {
+        std::map<Month, int> days = {{Jan, 31}, {Feb, 28}, {Mar, 31}, {Apr, 30}, {May, 31}, {Jun, 30}, {Jul, 31}, {Aug, 31}, {Sep, 30}, {Oct, 31}, {Nov, 30}, {Dec, 31}};
+        return year*31556926 +days[month]*86400 + day*86400;
+    }
+
     bool operator <(DateTime A, DateTime B) {
         if (A.date != B.date)
             return A.date < B.date;
@@ -128,6 +139,10 @@ namespace date_time {
 
     bool operator >(DateTime A, DateTime B) {
         return B < A;
+    }
+
+    int DateTime::toInt() const {
+        return date.toInt() + time.toInt();
     }
 
     std::ostream& operator<<(std::ostream& out, const Time time)

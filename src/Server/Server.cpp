@@ -41,3 +41,7 @@ bool operator ==(const Server& A, const Server& B) {
             && A.rack == B.rack
             && A.company == B.company;
 }
+
+int Server::toInt() const {
+    return 0; //TODO
+}
