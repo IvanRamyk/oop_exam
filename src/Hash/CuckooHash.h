@@ -15,7 +15,7 @@ template <class T> class CuckooHash {
 public:
     explicit CuckooHash(const std::vector<T>& vec);
 
-    typename std::vector<T>::iterator search(const T& item) const;
+    auto search(const T& item) const;
 
     std::pair<std::vector<T>, std::vector<T>> getData() const;
 
@@ -43,12 +43,12 @@ std::pair<std::vector<T>, std::vector<T>> CuckooHash<T>::getData() const {
 }
 
 template<class T>
-typename std::vector<T>::iterator CuckooHash<T>::search(const T &item) const {
+auto CuckooHash<T>::search(const T &item) const {
     if (_data1[item.toInt() % _data1.size()] == item) {
         return begin(_data1) + item.toInt() % _data1.size();
     }
 
-    if (_data2[(item.toInt() / _data2.size()) % _data2.size()]) {
+    if (_data2[(item.toInt() / _data2.size()) % _data2.size()] == item) {
         return begin(_data2) + (item.toInt() / _data2.size()) % _data2.size();
     }
 
