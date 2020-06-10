@@ -11,6 +11,7 @@ TEST(Hash, Cuckoo) {
     auto n = table.getData();
     table.search(date_time::Time(1,1,1));
     EXPECT_TRUE(table.getData() == n);
+    table.erase(date_time::Time(1,1,1));
 }
 
 TEST(Hash, Cuckoo2) {
