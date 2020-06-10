@@ -28,3 +28,9 @@ void SortWindow::on_backButton_clicked()
     this->close();
     emit mainWindowShow();
 }
+
+void SortWindow::on_backButton_2_clicked()
+{
+    this->close();
+    emit mainWindowShow();
+}

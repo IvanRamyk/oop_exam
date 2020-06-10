@@ -1,6 +1,11 @@
 #include "performcontainerwindow.h"
 #include "ui_performcontainerwindow.h"
 
+Map<std::string, Server, SplayTree> mapSplayServer;
+Map<std::string, date_time::DateTime, SplayTree> mapSplayDateTime;
+Map<std::string, Server, SingleLinkedOrderedList> mapListServer;
+Map<std::string, date_time::DateTime, SingleLinkedOrderedList> mapListDateTime;
+
 PerformContainerWindow::PerformContainerWindow(containType _type, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PerformContainerWindow),
@@ -86,6 +91,7 @@ void PerformContainerWindow::fillElement(Server &s){
 
     s.data_center = getField(table->item(1,1)).toStdString();
     s.rack = getField(table->item(2,1)).toStdString();
+    s.company = getField(table->item(3,1)).toStdString();
 
 }
 
@@ -126,45 +132,82 @@ date_time::DateTime PerformContainerWindow::getDateTimeElement(){
     return dt;
 }
 
-Server* PerformContainerWindow::findServerInContainer(containType _t, std::string key){
-    return nullptr;
+std::pair<bool, Server> PerformContainerWindow::findServerInContainer(std::string key){
+    std::pair<bool, Server> result = {false, Server()};
+    if(containerType == typeBalancedTree){
+        if(mapSplayServer.count(key))
+            result = {true, mapSplayServer.getValue(key)};
+    } else if (containerType == typeList){
+        if(mapListServer.count(key))
+            result = {true, mapListServer.getValue(key)};
+    }
+
+
+    return result;
 }
 
-date_time::DateTime* PerformContainerWindow::findDateTimeInContainer(containType _t, std::string key){
-    return nullptr;
+std::pair<bool, date_time::DateTime> PerformContainerWindow::findDateTimeInContainer(std::string key){
+    std::pair<bool, date_time::DateTime>  result = {false, date_time::DateTime()};
+    if(containerType == typeBalancedTree){
+        if(mapSplayDateTime.count(key))
+            result = {true, mapSplayDateTime.getValue(key)};
+    } else if (containerType == typeList){
+        if(mapListDateTime.count(key))
+            result = {true, mapListDateTime.getValue(key)};
+    }
+    return result;
 }
 
 
 void PerformContainerWindow::on_findButton_clicked()
 {
+    QTableWidgetItem* it;
     if(elementType == elementServer){
         currentKey = ui->findKey->toPlainText().toStdString();
-        Server* element = findServerInContainer(containerType, currentKey);
-        if(element == nullptr){
+        std::pair<bool, Server> pr = findServerInContainer(currentKey);
+        if(!pr.first){
             ui->foundIndicator->setText("Not found...");
+            for(int i = 0; i < ui->findElement->rowCount(); i++){
+                it = new QTableWidgetItem("");
+                it->setFlags(Qt::ItemIsEnabled);
+                ui->findElement->setItem(i,1,it);
+            }
         } else {
+            Server* element = &pr.second;
             ui->foundIndicator->setText("Found!");
             QTableWidgetItem* it = new QTableWidgetItem(QString::fromStdString(element->IP.toString()));
-            ui->findElement->setItem(0,0,it);
-            it = new QTableWidgetItem(QString::fromStdString(element->data_center));
+            it->setFlags(Qt::ItemIsEnabled);
             ui->findElement->setItem(0,1,it);
+            it = new QTableWidgetItem(QString::fromStdString(element->data_center));
+            it->setFlags(Qt::ItemIsEnabled);
+            ui->findElement->setItem(1,1,it);
             it = new QTableWidgetItem(QString::fromStdString(element->rack));
-            ui->findElement->setItem(0,2,it);
+            it->setFlags(Qt::ItemIsEnabled);
+            ui->findElement->setItem(2,1,it);
             it = new QTableWidgetItem(QString::fromStdString(element->company));
-            ui->findElement->setItem(0,3,it);
+            it->setFlags(Qt::ItemIsEnabled);
+            ui->findElement->setItem(3,1,it);
         }
 
     } else {
         currentKey = ui->findKey->toPlainText().toStdString();
-        date_time::DateTime* element = findDateTimeInContainer(containerType, currentKey);
-        if(element == nullptr){
+        std::pair<bool, date_time::DateTime> pr = findDateTimeInContainer(currentKey);
+
+        if(!pr.first){
             ui->foundIndicator->setText("Not found...");
+            for(int i = 0; i < ui->findElement->rowCount(); i++){
+                it = new QTableWidgetItem("");
+                it->setFlags(Qt::ItemIsEnabled);
+                ui->findElement->setItem(i,1,it);
+            }
         } else {
+            date_time::DateTime* element = &pr.second;
             ui->foundIndicator->setText("Found!");
             std::vector<int> dt = element->to_vector();
-            QTableWidgetItem* it;
+
             for(int i = 0; i < 6; i++){
                 it = new QTableWidgetItem(QString::fromStdString(std::to_string(dt[i]+1)));
+                it->setFlags(Qt::ItemIsEnabled);
                 ui->findElement->setItem(i,1,it);
             }
         }
@@ -195,55 +238,62 @@ void PerformContainerWindow::on_insertButton_clicked()
 
 void PerformContainerWindow::insertServerInContainer(containType _t, std::string key, Server s){
     if(_t == typeBalancedTree){
-
-        std::cout << "1" << std::endl;// setSplayServer.insert(s);
+        mapSplayServer.insert(key, s);
     }else if(_t == typeList){
-
-        std::cout << "2" << std::endl;// set_SLO_List_Server.insert(s);
+        mapListServer.insert(key, s);
     }
 }
 
 void PerformContainerWindow::insertDateTimeInContainer(containType _t, std::string key, date_time::DateTime s){
     if(_t == typeBalancedTree){
-
-        std::cout << "1" << std::endl;// setSplayDateTime.insert(s);
+        mapSplayDateTime.insert(key, s);
     }else if(_t == typeList){
-
-        std::cout << "2" << std::endl;//set_SLO_List_DateTime.insert(s);
+        mapListDateTime.insert(key, s);
     }
 }
 
 
 void PerformContainerWindow::on_deleteButton_clicked()
 {
-    currentKey = ui->findKey->toPlainText().toStdString();
+    currentKey = ui->deleteKey->toPlainText().toStdString();
 
     if(elementType == elementServer){
-        currentKey = ui->findKey->toPlainText().toStdString();
-
+        deleteServerInContainer(containerType, currentKey);
     } else {
+        deleteDateTimeInContainer(containerType, currentKey);
     }
 }
 
 
-void PerformContainerWindow::deleteServerInContainer(containType _t, Server elem){
+void PerformContainerWindow::deleteServerInContainer(containType _t, std::string key){
     if(_t == typeBalancedTree){
-         std::cout << "1" << std::endl;
+         mapSplayServer.erase(key);
 
     }else if(_t == typeList){
-
-        std::cout << "2" << std::endl;
-        //set_SLO_List_Server.erase(s);
+        mapListServer.erase(key);
     }
 }
 
-void PerformContainerWindow::deleteDateTimeInContainer(containType _t, date_time::DateTime elem){
+void PerformContainerWindow::deleteDateTimeInContainer(containType _t, std::string key){
     if(_t == typeBalancedTree){
-
-        std::cout << "1" << std::endl;//setSplayDateTime.erase(s);
+        mapSplayDateTime.erase(key);
     }else if(_t == typeList){
+        mapListDateTime.erase(key);
+    }
+}
 
-        std::cout << "1" << std::endl;
-//        set_SLO_List_DateTime.erase(s);
+void PerformContainerWindow::on_contentBox_activated(int index)
+{
+    fillTable(index);
+    switch(index){
+    case 0:
+        elementType = elementServer;
+        break;
+    case 1:
+        elementType = elementDateTime;
+        break;
+    default:
+        std::cout << "WRONG!\n";
+        break;
     }
 }

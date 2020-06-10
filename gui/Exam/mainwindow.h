@@ -23,6 +23,8 @@ private slots:
     void on_containerButton_clicked();
     void on_sortButton_clicked();
 
+    void on_benchmarkButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     SetWindow *setWindow;

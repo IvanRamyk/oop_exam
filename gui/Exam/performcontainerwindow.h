@@ -3,6 +3,7 @@
 
 #include "../../src/Server/Server.hpp"
 #include "../../src/Date/Date.hpp"
+#include "../../src/containers/Map/Map.hpp"
 #include "perform.h"
 #include <QMainWindow>
 
@@ -32,6 +33,8 @@ private slots:
 
     void on_deleteButton_clicked();
 
+    void on_contentBox_activated(int index);
+
 private:
     std::string currentKey;
 
@@ -45,14 +48,14 @@ private:
     Server getServerElement();
     date_time::DateTime getDateTimeElement();
 
-    Server* findServerInContainer(containType _t, std::string key);
-    date_time::DateTime* findDateTimeInContainer(containType _t, std::string key);
+    std::pair<bool, Server> findServerInContainer(std::string key);
+    std::pair<bool, date_time::DateTime> findDateTimeInContainer( std::string key);
 
     void insertServerInContainer(containType _t, std::string key, Server elem);
     void insertDateTimeInContainer(containType _t, std::string key, date_time::DateTime elem);
 
-    void deleteServerInContainer(containType _t, Server elem);
-    void deleteDateTimeInContainer(containType _t, date_time::DateTime elem);
+    void deleteServerInContainer(containType _t, std::string key);
+    void deleteDateTimeInContainer(containType _t, std::string key);
 
 };
 

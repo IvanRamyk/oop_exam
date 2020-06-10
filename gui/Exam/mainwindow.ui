@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>100</y>
+      <y>20</y>
       <width>300</width>
       <height>100</height>
      </rect>
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>250</y>
+      <y>160</y>
       <width>300</width>
       <height>100</height>
      </rect>
@@ -44,13 +44,26 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>400</y>
+      <y>300</y>
       <width>300</width>
       <height>100</height>
      </rect>
     </property>
     <property name="text">
      <string>Сортування</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="benchmarkButton">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>440</y>
+      <width>300</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Бенчмарк</string>
     </property>
    </widget>
   </widget>

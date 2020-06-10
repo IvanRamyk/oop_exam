@@ -122,7 +122,6 @@ void PerformSetWindow::on_contentBox_activated(int index)
             break;
         default:
             elementType = elementServer;
-            std::cout << "SOME SHIT IS GOING ON!\n";
         break;
     }
 }
@@ -152,7 +151,9 @@ void PerformSetWindow::fillElement(int tableId, Server &s){
     std::vector<int> id = {1,2,3,4};
     ip::address aps(1,2,3,4);
     s.IP = aps;
-    std::string name;
+    s.data_center = getName(table->item(1,1)).toStdString();
+    s.rack = getName(table->item(2,1)).toStdString();
+    s.company = getName(table->item(3,1)).toStdString();
 
 
 }
@@ -176,7 +177,7 @@ void PerformSetWindow::fillElement(int tableId, date_time::DateTime& dt){
         names[i] = getName(table->item(i,1)).toInt();
         //check correct
     }
-    date_time::DateTime newdt(names[0]-1, date_time::Month(names[1]-1), names[2], names[3], names[4], names[5]);
+    date_time::DateTime newdt(names[0]-1, date_time::Month(names[1]-1), names[2]-1, names[3]-1, names[4]-1, names[5]-1);
     dt = newdt;
 }
 

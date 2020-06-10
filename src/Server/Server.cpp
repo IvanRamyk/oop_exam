@@ -47,4 +47,5 @@ std::string ip::address::toString(){
 	for(int i = 0; i < fields.size()-1; i++)
 		s += std::to_string(fields[i]) + ".";
 	s += std::to_string(fields[fields.size()-1]);
+    return s;
 }
