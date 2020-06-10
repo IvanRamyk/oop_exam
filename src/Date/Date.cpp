@@ -91,6 +91,35 @@ namespace date_time {
         }
     }
 
+    int Date::month_int() const {
+        switch (month) {
+            case Jan:
+                return 0;
+            case Feb:
+                return 1;
+            case Mar:
+                return 2;
+            case Apr:
+                return 3;
+            case Jun:
+                return 4;
+            case Jul:
+                return 5;
+            case Aug:
+                return 6;
+            case Sep:
+                return 7;
+            case Oct:
+                return 8;
+            case Nov:
+                return 9;
+            case Dec:
+                return 10;
+            case May:
+                return 11;
+        }
+    }
+
     std::string Date::to_string() const {
         return std::to_string(year) + "-" + month_str() + "-" +  std::to_string(day);
     }
@@ -153,5 +182,19 @@ namespace date_time {
     std::ostream& operator<<(std::ostream& out, const Date date)
     {
         return out << date.to_string();
+    }
+
+    std::vector<int> DateTime::to_vector(){
+        auto dateVector = date.to_vector();
+        auto timeVector = time.to_vector();
+        return {dateVector[0], dateVector[1], dateVector[2], timeVector[0], timeVector[1], timeVector[2]};
+    }
+
+    std::vector<int> Date::to_vector(){
+        return {year, month_int(), day};
+    }
+
+    std::vector<int> Time::to_vector(){
+        return { hours, minutes, seconds};
     }
 }

@@ -38,3 +38,8 @@ void MainWindow::on_sortButton_clicked()
     this->close();
     sortWindow->show();
 }
+
+void MainWindow::on_benchmarkButton_clicked()
+{
+    std::cout << "Not implemented yet!\n";
+}

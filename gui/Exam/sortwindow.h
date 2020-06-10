@@ -1,6 +1,10 @@
 #ifndef SORTWINDOW_H
 #define SORTWINDOW_H
 
+#include "perform.h"
+#include "../../src/Date/Date.hpp"
+#include"../../src/Server/Server.hpp"
+#include "../../src/Sort/Sort.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -25,8 +29,37 @@ private slots:
 
     void on_backButton_clicked();
 
+    void on_backButton_2_clicked();
+
+    void on_insertButton_clicked();
+
+    void on_ipRadio_clicked();
+
+    void on_DataCenterRadio_clicked();
+
+    void on_RackRadio_clicked();
+
+    void on_CompanyRadio_clicked();
+
+    void on_contentBox_activated(int index);
+
+    void on_contentBox_activated(const QString &arg1);
+
+    void on_sortButton_clicked();
+
 private:
     Ui::SortWindow *ui;
+    void fillTable(int index);
+    void fillElement(Server& element);
+    void fillElement(date_time::DateTime &dt);
+    containType containerType;
+    elemType elementType;
+
+
+    std::vector<Server> getVectorServer();
+
+    void insertServerInTable(Server s);
+    void insertDateTimeInTable(date_time::DateTime s);
 };
 
 #endif // SORTWINDOW_H

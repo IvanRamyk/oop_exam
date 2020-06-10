@@ -3,6 +3,8 @@
 
 Set<SplayTree<Server>> setSplayServer;
 Set<SplayTree<date_time::DateTime>> setSplayDateTime;
+Set<SingleLinkedOrderedList<Server>> set_SLO_List_Server;
+Set<SingleLinkedOrderedList<date_time::DateTime>> set_SLO_List_DateTime;
 
 
 
@@ -120,22 +122,14 @@ void PerformSetWindow::on_contentBox_activated(int index)
             break;
         default:
             elementType = elementServer;
-            std::cout << "SOME SHIT IS GOING ON!\n";
         break;
     }
 }
 
-
-template <class T>
-T getElement(elemType _t){
-    if(_t == elementServer){
-        ip::address adr(127,0,0,1);
-        Server s(adr);
-        return s;
-    } else {
-        date_time::DateTime dt;
-        return dt;
-    }
+QString getName(QTableWidgetItem* it){
+    if(!it)
+        return "";
+    else return it->text();
 }
 
 
@@ -154,14 +148,10 @@ void PerformSetWindow::fillElement(int tableId, Server &s){
             break;
     }
 
-    std::vector<int> id = {1,2,3,4};
-    ip::address aps(1,2,3,4);
-    s.IP = aps;
-    auto dc = table->item(1,1)->text().toStdString();
-    s.data_center = dc;
-    auto rc = table->item(2,1)->text().toStdString();
-    s.rack = rc;
-
+    s.IP = ip::address(convertIpToVector(table->item(0,1)->text().toStdString()));
+    s.data_center = table->item(1,1)->text().toStdString();
+    s.rack = table->item(2,1)->text().toStdString();
+    s.company = table->item(3,1)->text().toStdString();
 }
 
 
@@ -180,10 +170,10 @@ void PerformSetWindow::fillElement(int tableId, date_time::DateTime& dt){
     }
     int names[6];
     for(int i  =0; i < 6; i++){
-        names[i] = table->item(i,1)->text().toInt();
+        names[i] = getName(table->item(i,1)).toInt();
         //check correct
     }
-    date_time::DateTime newdt(names[0]-1, date_time::Month(names[1]-1), names[2], names[3], names[4], names[5]);
+    date_time::DateTime newdt(names[0]-1, date_time::Month(names[1]-1), names[2]-1, names[3]-1, names[4]-1, names[5]-1);
     dt = newdt;
 }
 
@@ -217,14 +207,17 @@ bool PerformSetWindow::findServerInSet(containType _t, Server s){
         std::cout << x << std::endl;
         return x;
         //return false;//setSplayServer.count(s);
+    }else if(_t == typeList){
+        return set_SLO_List_Server.count(s);
     }
     return true;
 }
 
 bool PerformSetWindow::findDateTimeInSet(containType _t, date_time::DateTime s){
     if(_t == typeBalancedTree){
-     //   return setSplayServer.count(s);
         return setSplayDateTime.count(s);
+    }else if(_t == typeList){
+        return set_SLO_List_DateTime.count(s);
     }
     return true;
 }
@@ -246,12 +239,16 @@ void PerformSetWindow::on_insertButton_clicked()
 void PerformSetWindow::insertServerInSet(containType _t, Server s){
     if(_t == typeBalancedTree){
          setSplayServer.insert(s);
+    }else if(_t == typeList){
+        set_SLO_List_Server.insert(s);
     }
 }
 
 void PerformSetWindow::insertDateTimeInSet(containType _t, date_time::DateTime s){
     if(_t == typeBalancedTree){
         setSplayDateTime.insert(s);
+    }else if(_t == typeList){
+        set_SLO_List_DateTime.insert(s);
     }
 }
 
@@ -273,12 +270,16 @@ void PerformSetWindow::on_deleteButton_clicked()
 void PerformSetWindow::deleteServerInSet(containType _t, Server s){
     if(_t == typeBalancedTree){
          setSplayServer.erase(s);
+    }else if(_t == typeList){
+        set_SLO_List_Server.erase(s);
     }
 }
 
 void PerformSetWindow::deleteDateTimeInSet(containType _t, date_time::DateTime s){
     if(_t == typeBalancedTree){
         setSplayDateTime.erase(s);
+    }else if(_t == typeList){
+        set_SLO_List_DateTime.erase(s);
     }
 }
 

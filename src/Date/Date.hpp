@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <vector>
 
 namespace date_time {
     enum Month {
@@ -21,6 +22,7 @@ namespace date_time {
         int day;
 
         std::string month_str() const;
+        int month_int() const;
 
     public:
         std::string to_string() const;
@@ -32,6 +34,7 @@ namespace date_time {
         friend bool operator >(Date A, Date B);
         friend bool operator ==(Date A, Date B);
         friend bool operator !=(Date A, Date B);
+        std::vector<int> to_vector();
     };
 
     class Time {
@@ -49,6 +52,7 @@ namespace date_time {
         friend bool operator >(Time A, Time B);
         friend bool operator ==(Time A, Time B);
         friend bool operator !=(Time A, Time B);
+        std::vector<int> to_vector();
     };
 
 
@@ -65,6 +69,7 @@ namespace date_time {
         friend bool operator >(DateTime A, DateTime B);
         friend bool operator ==(DateTime A, DateTime B);
         friend bool operator !=(DateTime A, DateTime B);
+        std::vector <int> to_vector();
     };
 
 

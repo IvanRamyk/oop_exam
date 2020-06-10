@@ -57,6 +57,7 @@ private:
 
 template<class T>
 Sort<T>::Sort(const std::vector<T>& data) {
+    _data.resize(data.size());
     _data = data;
 }
 
