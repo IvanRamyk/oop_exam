@@ -118,7 +118,7 @@ struct SetOperations <CuckooHash<T>> {
 
     static auto count(CuckooHash<T>& container, const value_type& value)
     {
-        return container.search(value) != container.getData().first.end();
+        return container.count(value);
     }
 
     static auto search(CuckooHash<T>& container, const value_type& value)

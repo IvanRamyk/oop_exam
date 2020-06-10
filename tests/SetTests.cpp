@@ -265,7 +265,7 @@ TEST(Set, hash){
     Set<CuckooHash<date_time::Time>> s;
     s.insert(date_time::Time(1,1,1));
     EXPECT_TRUE(s.count(date_time::Time(1,1,1)));
-    //EXPECT_FALSE(s.count(date_time::Time(1,3,1)));
+    EXPECT_FALSE(s.count(date_time::Time(1,3,1)));
     s.erase(date_time::Time(1,1,1));
-    //EXPECT_FALSE(s.count(date_time::Time(1,1,1)));
+    EXPECT_FALSE(s.count(date_time::Time(1,1,1)));
 }
