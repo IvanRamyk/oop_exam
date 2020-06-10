@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <functional>
+#include <chrono>
 
 template <class T> class Sort {
 public:
@@ -28,9 +29,14 @@ public:
 
     void radixSort(const std::function<bool(T, T)>& compare);
 
+    void setStartTime();
+
+    double getTime() const;
+
     std::vector<T> getData() const;
 private:
     std::vector<T> _data;
+    std::chrono::time_point<std::chrono::high_resolution_clock> _start = std::chrono::high_resolution_clock::now();
 
     void merge(std::vector<T>& vec, int iLeft, int iRight, int iEnd, std::vector<T>& temp, const std::function<bool(T, T)> &compare);
 
@@ -250,6 +256,18 @@ void Sort<T>::radixSort(const std::function<bool(T, T)> &compare) {
         MAX /= 10;
         ++k;
     }
+}
+
+template<class T>
+double Sort<T>::getTime() const {
+    auto _finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = _finish - _start;
+    return elapsed.count();
+}
+
+template<class T>
+void Sort<T>::setStartTime() {
+    _start = std::chrono::high_resolution_clock::now();
 }
 
 
