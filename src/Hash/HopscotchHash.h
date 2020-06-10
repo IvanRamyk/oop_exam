@@ -13,7 +13,8 @@
 
 template <class T> class HopscotchHash {
 public:
-    explicit HopscotchHash(const std::vector<T>& vec);
+    using value_type = T;
+    explicit HopscotchHash(const std::vector<T>& vec = {});
 
     auto search(const T& item) const;
 
@@ -28,6 +29,8 @@ public:
     void deleteCopy();
 
     void erase(const T& item);
+
+    bool count(const T& item) const ;
 
 private:
     std::vector<T> _data;
@@ -53,8 +56,9 @@ auto HopscotchHash<T>::search(const T &item) const {
 
 template<class T>
 HopscotchHash<T>::HopscotchHash(const std::vector<T> &vec) {
-    _data.resize(vec.size()*2);
-    _added.resize(vec.size()*2);
+    int size = 1000;
+    _data.resize(size);
+    _added.resize(size);
     for (const auto& item : vec) {
         add(item);
     }
@@ -102,6 +106,11 @@ void HopscotchHash<T>::erase(const T& item) {
     if (it != end(_data)) {
         _data.erase(it);
     }
+}
+
+template<class T>
+bool HopscotchHash<T>::count(const T &item) const {
+    return search(item) != _data.end();
 }
 
 #endif //OOP_EXAM_HOPSCOTCHHASH_H

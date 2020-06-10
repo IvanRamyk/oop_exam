@@ -13,7 +13,8 @@
 
 template <class T> class CuckooHash {
 public:
-    explicit CuckooHash(const std::vector<T>& vec);
+    using value_type = T;
+    explicit CuckooHash(const std::vector<T>& vec =  {});
 
     auto search(const T& item) const;
 
@@ -28,6 +29,8 @@ public:
     void deleteCopy();
 
     void erase(const T& item);
+
+    bool count(const T& item) const;
 
 private:
     std::vector<T> _data1;
@@ -57,10 +60,11 @@ auto CuckooHash<T>::search(const T &item) const {
 
 template<class T>
 CuckooHash<T>::CuckooHash(const std::vector<T> &vec) {
-    _data1.resize(vec.size()*2);
-    _data2.resize(vec.size()*2);
-    _added1.resize(vec.size());
-    _added2.resize(vec.size());
+    int size = 1000;
+    _data1.resize(size);
+    _data2.resize(size);
+    _added1.resize(size);
+    _added2.resize(size);
     for (const auto& item : vec) {
         add(item);
     }
@@ -133,15 +137,20 @@ void CuckooHash<T>::deleteCopy() {
 template<class T>
 void CuckooHash<T>::erase(const T &item) {
     auto iter = search(item);
-    if (item != end(_data1)) {
+    if (iter != end(_data1)) {
         if (_data1[item.toInt() % _data1.size()] == item) {
             _data1.erase(begin(_data1) + item.toInt() % _data1.size());
         }
 
-        if (_data2[(item.toInt() / _data2.size()) % _data2.size()]) {
+        if (_data2[(item.toInt() / _data2.size()) % _data2.size()] == item) {
             _data1.erase(begin(_data2) + (item.toInt() / _data2.size()) % _data2.size());
         }
     }
+}
+
+template<class T>
+bool CuckooHash<T>::count(const T &item) const {
+    return search(item) != _data1.end();
 }
 
 

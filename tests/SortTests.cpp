@@ -15,7 +15,7 @@ TEST(Sort, selectionSort) {
     std::vector<Server> servs;
     servs.push_back(Server(ip::address(1,1,1,1)));
     servs.push_back(Server(ip::address(1,2,1,1)));
-    servs.push_back(Server(ip::address(1,2,1,1), 2, "asd", "asd"));
+    servs.push_back(Server(ip::address(1,2,1,1), "2", "asd", "asd"));
     Sort<Server> newSort(servs);
     newSort.selectionSort([](Server lhs, Server rhs){ return true;});
     std::function<bool(int, int)> f = [](int lhs, int rhs){ return  lhs < rhs;};
