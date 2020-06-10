@@ -28,6 +28,7 @@ namespace ip {
         }
         friend std::ostream& operator<<(std::ostream& os, const address& IP);
         friend bool operator ==(const address& A, const address& B);
+        std::string toString();
 
 
     };

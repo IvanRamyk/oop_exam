@@ -127,17 +127,10 @@ void PerformSetWindow::on_contentBox_activated(int index)
     }
 }
 
-
-template <class T>
-T getElement(elemType _t){
-    if(_t == elementServer){
-        ip::address adr(127,0,0,1);
-        Server s(adr);
-        return s;
-    } else {
-        date_time::DateTime dt;
-        return dt;
-    }
+QString getName(QTableWidgetItem* it){
+    if(!it)
+        return "";
+    else return it->text();
 }
 
 
@@ -159,11 +152,8 @@ void PerformSetWindow::fillElement(int tableId, Server &s){
     std::vector<int> id = {1,2,3,4};
     ip::address aps(1,2,3,4);
     s.IP = aps;
-    auto dc = table->item(1,1)->text();
-    std::string si = dc.toStdString();
-    s.data_center = si;
-    auto rc = table->item(2,1)->text().toStdString();
-    s.rack = rc;
+    std::string name;
+
 
 }
 
@@ -183,7 +173,7 @@ void PerformSetWindow::fillElement(int tableId, date_time::DateTime& dt){
     }
     int names[6];
     for(int i  =0; i < 6; i++){
-        names[i] = table->item(i,1)->text().toInt();
+        names[i] = getName(table->item(i,1)).toInt();
         //check correct
     }
     date_time::DateTime newdt(names[0]-1, date_time::Month(names[1]-1), names[2], names[3], names[4], names[5]);

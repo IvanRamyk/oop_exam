@@ -41,3 +41,10 @@ bool operator ==(const Server& A, const Server& B) {
             && A.rack == B.rack
             && A.company == B.company;
 }
+
+std::string ip::address::toString(){
+	std::string s = "";
+	for(int i = 0; i < fields.size()-1; i++)
+		s += std::to_string(fields[i]) + ".";
+	s += std::to_string(fields[fields.size()-1]);
+}

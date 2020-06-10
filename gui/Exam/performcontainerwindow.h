@@ -26,19 +26,33 @@ signals:
 private slots:
     void on_backButton_clicked();
 
+    void on_insertButton_clicked();
+
+    void on_findButton_clicked();
+
+    void on_deleteButton_clicked();
+
 private:
+    std::string currentKey;
+
     Ui::PerformContainerWindow *ui;
     void fillTable(int index);
-    void fillElement(int tableId, Server& s);
-    void fillElement(int tableId, date_time::DateTime& dt);
+    void fillElement(Server& s);
+    void fillElement(date_time::DateTime& dt);
     containType containerType;
     elemType elementType;
 
     Server getServerElement();
     date_time::DateTime getDateTimeElement();
 
-    bool findServerInSet(containType _t, Server elem);
-    bool findDateTimeInSet(containType _t, date_time::DateTime elem);
+    Server* findServerInContainer(containType _t, std::string key);
+    date_time::DateTime* findDateTimeInContainer(containType _t, std::string key);
+
+    void insertServerInContainer(containType _t, std::string key, Server elem);
+    void insertDateTimeInContainer(containType _t, std::string key, date_time::DateTime elem);
+
+    void deleteServerInContainer(containType _t, Server elem);
+    void deleteDateTimeInContainer(containType _t, date_time::DateTime elem);
 
 };
 
