@@ -27,6 +27,8 @@ public:
 
     void deleteCopy();
 
+    void erase(const T& item);
+
 private:
     std::vector<T> _data;
     std::vector<bool> _added;
@@ -91,6 +93,14 @@ void HopscotchHash<T>::deleteCopy() {
                 _added[j] = false;
             }
         }
+    }
+}
+
+template<class T>
+void HopscotchHash<T>::erase(const T& item) {
+    auto it = search(item);
+    if (it != end(_data)) {
+        _data.erase(it);
     }
 }
 
