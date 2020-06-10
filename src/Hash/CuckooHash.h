@@ -27,6 +27,8 @@ public:
 
     void deleteCopy();
 
+    void erase(const T& item);
+
 private:
     std::vector<T> _data1;
     std::vector<T> _data2;
@@ -128,6 +130,19 @@ void CuckooHash<T>::deleteCopy() {
     }
 }
 
+template<class T>
+void CuckooHash<T>::erase(const T &item) {
+    auto iter = search(item);
+    if (item != end(_data1)) {
+        if (_data1[item.toInt() % _data1.size()] == item) {
+            _data1.erase(begin(_data1) + item.toInt() % _data1.size());
+        }
+
+        if (_data2[(item.toInt() / _data2.size()) % _data2.size()]) {
+            _data1.erase(begin(_data2) + (item.toInt() / _data2.size()) % _data2.size());
+        }
+    }
+}
 
 
 #endif //OOP_EXAM_CUCKOOHASH_H
