@@ -8,17 +8,26 @@
 #include <vector>
 #include "Tree.hpp"
 
-template <typename TreeItem>
+template <typename T>
+struct Comp {
+    bool operator()(T a, T b) {
+        return a < b;
+    }
+};
+
+template <typename TreeItem, typename Comparator>
 class SplayTree;
+
 
 template <typename TreeItem>
 class SplayTreeNode: public Node<TreeItem>{
 private:
+public:
+
     TreeItem _value;
     SplayTreeNode<TreeItem> * _left;
     SplayTreeNode<TreeItem> * _right;
     SplayTreeNode<TreeItem> * _parent;
-public:
     explicit SplayTreeNode<TreeItem> (
             TreeItem item,
             SplayTreeNode<TreeItem> * left = nullptr,
@@ -29,10 +38,9 @@ public:
 
     Node<TreeItem> * next();
 
-    friend class SplayTree<TreeItem>;
 };
 
-template <typename TreeItem>
+template <typename TreeItem, typename Comparator = Comp<TreeItem>>
 class SplayTree: public Tree <TreeItem> {
 private:
     SplayTreeNode <TreeItem> * _root;
@@ -85,8 +93,8 @@ public:
 };
 
 
-template<typename TreeItem>
-void SplayTree<TreeItem>::_print(SplayTreeNode<TreeItem> *node, std::vector<std::pair<TreeItem, TreeItem>> &events) {
+template<typename TreeItem,typename Comparator>
+void SplayTree<TreeItem, Comparator>::_print(SplayTreeNode<TreeItem> *node, std::vector<std::pair<TreeItem, TreeItem>> &events) {
     if (node->_left != nullptr){
         events.push_back({node->value(),node->_left->value()});
         _print(node->_left, events);
@@ -97,20 +105,20 @@ void SplayTree<TreeItem>::_print(SplayTreeNode<TreeItem> *node, std::vector<std:
     }
 }
 
-template<typename TreeItem>
-SplayTree<TreeItem>::SplayTree(SplayTreeNode <TreeItem> * root) {
+template<typename TreeItem,typename Comparator>
+SplayTree<TreeItem, Comparator>::SplayTree(SplayTreeNode <TreeItem> * root) {
     _root = root;
 }
 
-template<typename TreeItem>
-int SplayTree<TreeItem>::_height(SplayTreeNode<TreeItem> *node) {
+template<typename TreeItem,typename Comparator>
+int SplayTree<TreeItem, Comparator>::_height(SplayTreeNode<TreeItem> *node) {
     if (node == nullptr)
         return 0;
     return std::max(_height(node->_left), _height(node->_right)) + 1;
 }
 
-template<typename TreeItem>
-int SplayTree<TreeItem>::height() {
+template<typename TreeItem,typename Comparator>
+int SplayTree<TreeItem, Comparator>::height() {
     return _height(_root);
 }
 
@@ -138,23 +146,23 @@ Node<TreeItem> *SplayTreeNode<TreeItem>::next() {
     return cur->_parent;
 }
 
-template<typename TreeItem>
-std::vector<std::pair<TreeItem, TreeItem>> SplayTree<TreeItem>::print() {
+template<typename TreeItem,typename Comparator>
+std::vector<std::pair<TreeItem, TreeItem>> SplayTree<TreeItem, Comparator>::print() {
     std::vector<std::pair<TreeItem, TreeItem>> events;
     _print(_root, events);
     return events;
 }
 
-template<typename TreeItem>
-SplayTreeNode<TreeItem> * SplayTree<TreeItem>::search(TreeItem item) {
+template<typename TreeItem,typename Comparator>
+SplayTreeNode<TreeItem> * SplayTree<TreeItem, Comparator>::search(TreeItem item) {
     _root = _search(_root, item);
     if (_root != nullptr && _root->value() == item)
         return _root;
     return nullptr;
 }
 
-template<typename TreeItem>
-void SplayTree<TreeItem>::insert(TreeItem item) {
+template<typename TreeItem,typename Comparator>
+void SplayTree<TreeItem, Comparator>::insert(TreeItem item) {
     std::pair<SplayTreeNode<TreeItem> * , SplayTreeNode<TreeItem> * > split_res = _split(item);
     _root = new SplayTreeNode<TreeItem>(item, split_res.first, split_res.second, nullptr);
     if (_root->_left != nullptr) {
@@ -165,8 +173,8 @@ void SplayTree<TreeItem>::insert(TreeItem item) {
     }
 }
 
-template<typename TreeItem>
-void SplayTree<TreeItem>::remove(SplayTreeNode<TreeItem> * z) {
+template<typename TreeItem,typename Comparator>
+void SplayTree<TreeItem, Comparator>::remove(SplayTreeNode<TreeItem> * z) {
     if (z == nullptr)
         return;
     _root = _search(_root, z->value());
@@ -179,8 +187,8 @@ void SplayTree<TreeItem>::remove(SplayTreeNode<TreeItem> * z) {
     _root = _merge(left, right);
 }
 
-template<typename TreeItem>
-SplayTreeNode<TreeItem> *SplayTree<TreeItem>::_merge(SplayTreeNode<TreeItem> *first, SplayTreeNode<TreeItem> *second) {
+template<typename TreeItem,typename Comparator>
+SplayTreeNode<TreeItem> *SplayTree<TreeItem, Comparator>::_merge(SplayTreeNode<TreeItem> *first, SplayTreeNode<TreeItem> *second) {
     if (first == nullptr)
         return second;
     if (second == nullptr)
@@ -192,8 +200,8 @@ SplayTreeNode<TreeItem> *SplayTree<TreeItem>::_merge(SplayTreeNode<TreeItem> *fi
     return second;
 }
 
-template<typename TreeItem>
-void SplayTree<TreeItem>::_rotate(SplayTreeNode<TreeItem> *node) {
+template<typename TreeItem,typename Comparator>
+void SplayTree<TreeItem, Comparator>::_rotate(SplayTreeNode<TreeItem> *node) {
     if (node != nullptr && node->_parent != nullptr) {
         if (node->_parent->_left == node) {
             SplayTreeNode<TreeItem> *parent = node->_parent;
@@ -236,8 +244,8 @@ void SplayTree<TreeItem>::_rotate(SplayTreeNode<TreeItem> *node) {
     }
 }
 
-template<typename TreeItem>
-SplayTreeNode<TreeItem> *SplayTree<TreeItem>::_splay(SplayTreeNode<TreeItem> *node) {
+template<typename TreeItem,typename Comparator>
+SplayTreeNode<TreeItem> *SplayTree<TreeItem, Comparator>::_splay(SplayTreeNode<TreeItem> *node) {
     if (node == nullptr || node->_parent == nullptr)
         return node;
     SplayTreeNode<TreeItem> * parent = node->_parent;
@@ -258,8 +266,8 @@ SplayTreeNode<TreeItem> *SplayTree<TreeItem>::_splay(SplayTreeNode<TreeItem> *no
     return _splay(node);
 }
 
-template<typename TreeItem>
-SplayTreeNode<TreeItem> *SplayTree<TreeItem>::_search(SplayTreeNode<TreeItem> *node, TreeItem item) {
+template<typename TreeItem,typename Comparator>
+SplayTreeNode<TreeItem> *SplayTree<TreeItem, Comparator>::_search(SplayTreeNode<TreeItem> *node, TreeItem item) {
     if (node == nullptr)
         return nullptr;
     if (item == node->value())
@@ -271,8 +279,8 @@ SplayTreeNode<TreeItem> *SplayTree<TreeItem>::_search(SplayTreeNode<TreeItem> *n
     return _splay(node);
 }
 
-template<typename TreeItem>
-std::pair<SplayTreeNode<TreeItem> *, SplayTreeNode<TreeItem> *> SplayTree<TreeItem>::_split(TreeItem key) {
+template<typename TreeItem,typename Comparator>
+std::pair<SplayTreeNode<TreeItem> *, SplayTreeNode<TreeItem> *> SplayTree<TreeItem, Comparator>::_split(TreeItem key) {
     if (_root == nullptr)
         return {nullptr, nullptr};
     SplayTreeNode<TreeItem> * temp = _search(_root, key);
@@ -288,8 +296,8 @@ std::pair<SplayTreeNode<TreeItem> *, SplayTreeNode<TreeItem> *> SplayTree<TreeIt
     return {left, temp};
 }
 
-template<typename TreeItem>
-TreeIterator<TreeItem> SplayTree<TreeItem>::begin() {
+template<typename TreeItem,typename Comparator>
+TreeIterator<TreeItem> SplayTree<TreeItem, Comparator>::begin() {
     if (_root == nullptr)
         return TreeIterator<TreeItem>(nullptr);
     SplayTreeNode<TreeItem> * cur = _root;
@@ -298,8 +306,8 @@ TreeIterator<TreeItem> SplayTree<TreeItem>::begin() {
     return TreeIterator<TreeItem>(cur);
 }
 
-template<typename TreeItem>
-TreeIterator<TreeItem> SplayTree<TreeItem>::end() {
+template<typename TreeItem,typename Comparator>
+TreeIterator<TreeItem> SplayTree<TreeItem, Comparator>::end() {
     return TreeIterator<TreeItem>(nullptr);
 }
 

@@ -31,10 +31,10 @@ bool operator >(Pair<Tkey, Tvalue> left, Pair<Tkey, Tvalue> right) {
 
 
 
-template <typename Tkey, typename Tvalue, template <typename> class Container>
+template <typename Tkey, typename Tvalue, template <typename, class> class Container, typename Comparator=Comp<Pair<Tkey, Tvalue>>>
 class Map {
 public:
-    using Tset = Set<Container<Pair<Tkey, Tvalue>>>;
+    using Tset = Set<Container<Pair<Tkey, Tvalue>,Comparator>>;
 
     void insert(Tkey key, Tvalue value) {
         if (count(key))
