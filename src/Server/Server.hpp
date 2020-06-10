@@ -41,6 +41,7 @@ public:
     std::string rack;
     std::string company;
     explicit Server(ip::address _IP = ip::address(0,0,0,0), int _id = -1, std::string _rack = "", std::string center = ""): IP(std::move(_IP)), data_center(center), rack(_rack) {};
+    [[nodiscard]] int toInt() const;
     friend bool operator <(const Server& A, const Server& B);
     friend bool operator >(const Server& A, const Server& B);
     friend bool operator ==(const Server& A, const Server& B);
