@@ -13,7 +13,8 @@
 
 template <class T> class HopscotchHash {
 public:
-    explicit HopscotchHash(const std::vector<T>& vec);
+    using value_type = T;
+    explicit HopscotchHash(const std::vector<T>& vec = {});
 
     auto search(const T& item) const;
 

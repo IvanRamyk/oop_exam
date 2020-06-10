@@ -14,6 +14,7 @@
 #include "../../structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp"
 #include "../../structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp"
 #include "../../Hash/CuckooHash.h"
+#include "../../Hash/HopscotchHash.h"
 
 template <typename Structure>
 struct SetOperations;
@@ -137,6 +138,38 @@ struct SetOperations <CuckooHash<T>> {
         return std::vector<T> {};
     }
 };
+
+
+template <typename T>
+struct SetOperations <HopscotchHash<T>> {
+    using value_type = typename HopscotchHash<T>::value_type;
+    static auto insert (HopscotchHash<T>& container, const value_type& value)
+    {
+        container.add(value);
+    }
+
+    static auto count(HopscotchHash<T>& container, const value_type& value)
+    {
+        return container.count(value);
+    }
+
+    static auto search(HopscotchHash<T>& container, const value_type& value)
+    {
+        return container.search(value);
+    }
+
+    static auto erase(HopscotchHash<T>& container, const value_type& value)
+    {
+        container.erase(value);
+    }
+
+    static auto elements(HopscotchHash<T>& container)
+    {
+        //return container.elements();
+        return std::vector<T> {};
+    }
+};
+
 
 
 
