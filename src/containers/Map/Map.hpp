@@ -12,7 +12,12 @@ template <typename Tkey, typename Tvalue>
 struct Pair {
     Tkey key;
     Tvalue value;
+    int toInt(){
+        return key.toInt();
+    }
 };
+
+
 
 template <typename Tkey, typename Tvalue>
 bool operator <(Pair<Tkey, Tvalue> left, Pair<Tkey, Tvalue> right) {
@@ -31,10 +36,10 @@ bool operator >(Pair<Tkey, Tvalue> left, Pair<Tkey, Tvalue> right) {
 
 
 
-template <typename Tkey, typename Tvalue, template <typename, class> class Container, typename Comparator=Comp<Pair<Tkey, Tvalue>>>
+template <typename Tkey, typename Tvalue, template <typename> class Container>
 class Map {
 public:
-    using Tset = Set<Container<Pair<Tkey, Tvalue>,Comparator>>;
+    using Tset = Set<Container<Pair<Tkey, Tvalue>>>;
 
     void insert(Tkey key, Tvalue value) {
         if (count(key))
