@@ -66,7 +66,8 @@ HopscotchHash<T>::HopscotchHash(const std::vector<T> &vec) {
 
 template<class T>
 void HopscotchHash<T>::add(const T& item) {
-    int curr = item.toInt() % _data.size();
+    auto c = item;
+    int curr = c.toInt() % _data.size();
     while (_added[curr]) {
         ++curr;
         curr %= _data.size();
