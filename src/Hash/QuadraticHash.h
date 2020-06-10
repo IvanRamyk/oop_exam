@@ -28,7 +28,7 @@ private:
 
 template<class T>
 std::vector<T> QuadraticHash<T>::getData() const {
-    return std::vector<T>();
+    return _data;
 }
 
 template<class T>
@@ -45,8 +45,8 @@ typename std::vector<T>::iterator QuadraticHash<T>::search(const T &item) const 
 
 template<class T>
 QuadraticHash<T>::QuadraticHash(const std::vector<T> &vec) {
-    _data.reserve(vec.size());
-    _added.reserve(vec.size());
+    _data.resize(vec.size());
+    _added.resize(vec.size());
     for (const auto& item : vec) {
         add(item);
     }

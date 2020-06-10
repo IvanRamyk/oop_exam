@@ -43,5 +43,14 @@ bool operator ==(const Server& A, const Server& B) {
 }
 
 int Server::toInt() const {
-    return 0; //TODO
+    std::string hashString = data_center + rack + company;
+    const int p = 31;
+    const int m = 1e9 + 9;
+    int hash_value = 0;
+    int p_pow = 1;
+    for (char c : hashString) {
+        hash_value = (hash_value + (c - 'a' + 1) * p_pow) % m;
+        p_pow = (p_pow * p) % m;
+    }
+    return hash_value;
 }

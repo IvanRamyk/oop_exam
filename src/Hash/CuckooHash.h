@@ -16,7 +16,7 @@ public:
 
     typename std::vector<T>::iterator search(const T& item) const;
 
-    std::vector<T> getData() const;
+    std::pair<std::vector<T>, std::vector<T>> getData() const;
 
 
 private:
@@ -29,8 +29,8 @@ private:
 };
 
 template<class T>
-std::vector<T> CuckooHash<T>::getData() const {
-    return std::vector<T>();
+std::pair<std::vector<T>, std::vector<T>> CuckooHash<T>::getData() const {
+    return {_data1, _data2};
 }
 
 template<class T>
@@ -40,7 +40,7 @@ typename std::vector<T>::iterator CuckooHash<T>::search(const T &item) const {
     }
 
     if (_data2[(item.toInt() / _data2.size()) % _data2.size()]) {
-        return begin(_data2) + [(item.toInt() / _data2.size()) % _data2.size()];
+        return begin(_data2) + (item.toInt() / _data2.size()) % _data2.size();
     }
 
     return end(_data1);
@@ -48,10 +48,10 @@ typename std::vector<T>::iterator CuckooHash<T>::search(const T &item) const {
 
 template<class T>
 CuckooHash<T>::CuckooHash(const std::vector<T> &vec) {
-    _data1.reserve(vec.size()*2);
-    _data2.reserve(vec.size()*2);
-    _added1.reserve(vec.size());
-    _added2.reserve(vec.size());
+    _data1.resize(vec.size()*2);
+    _data2.resize(vec.size()*2);
+    _added1.resize(vec.size());
+    _added2.resize(vec.size());
     for (const auto& item : vec) {
         add(item);
     }
