@@ -14,7 +14,7 @@ TEST(Map, MapSplayTree){
 
 }
 
-/*
+
 TEST(Map, MapList){
     Map <int, int, SingleLinkedOrderedList> map;
     map.insert(3, 4);
@@ -40,7 +40,7 @@ TEST(Map, MapListValues){
     map.insert(2, 20);
     pairs = map.pairs();
     EXPECT_EQ(pairs.size(), 2);
-}*/
+}
 
 TEST(Map, MapTreeValues){
     Map <int, int, SplayTree> map;
