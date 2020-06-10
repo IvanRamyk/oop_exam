@@ -10,7 +10,8 @@ TEST(Hash, Cuckoo) {
     CuckooHash<date_time::Time> table({date_time::Time(1, 1, 1),date_time::Time(1, 1, 5) });
     auto n = table.getData();
     table.search(date_time::Time(1,1,1));
-    EXPECT_TRUE(table.getData() == n);
+    EXPECT_TRUE(table.count(date_time::Time(1,1,1)));
+    EXPECT_TRUE(!table.count(date_time::Time(10,1,1)));
     table.erase(date_time::Time(1,1,1));
 }
 

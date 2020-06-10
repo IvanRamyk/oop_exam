@@ -30,6 +30,8 @@ public:
 
     void erase(const T& item);
 
+    bool count(const T& item) const;
+
 private:
     std::vector<T> _data1;
     std::vector<T> _data2;
@@ -144,6 +146,11 @@ void CuckooHash<T>::erase(const T &item) {
             _data1.erase(begin(_data2) + (item.toInt() / _data2.size()) % _data2.size());
         }
     }
+}
+
+template<class T>
+bool CuckooHash<T>::count(const T &item) const {
+    return search(item) != _data1.end();
 }
 
 

@@ -29,6 +29,8 @@ public:
 
     void erase(const T& item);
 
+    bool count(const T& item) const ;
+
 private:
     std::vector<T> _data;
     std::vector<bool> _added;
@@ -103,6 +105,11 @@ void HopscotchHash<T>::erase(const T& item) {
     if (it != end(_data)) {
         _data.erase(it);
     }
+}
+
+template<class T>
+bool HopscotchHash<T>::count(const T &item) const {
+    return search(item) != _data.end();
 }
 
 #endif //OOP_EXAM_HOPSCOTCHHASH_H
