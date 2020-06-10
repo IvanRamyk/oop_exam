@@ -6,6 +6,7 @@
 #define OOP_EXAM_QUADRATICHASH_H
 
 #include <vector>
+#include <chrono>
 #include "../../src/Date/Date.hpp"
 #include "../../src/Server/Server.hpp"
 
@@ -18,10 +19,14 @@ public:
 
     std::vector<T> getData() const;
 
+    void setStartTime();
+
+    double getTime() const;
 
 private:
     std::vector<T> _data;
     std::vector<bool> _added;
+    std::chrono::time_point<std::chrono::high_resolution_clock> _start = std::chrono::high_resolution_clock::now();
 
     void add(const T& item);
 };
@@ -65,6 +70,18 @@ void QuadraticHash<T>::add(const T& item) {
             ++i;
         }
     }
+}
+
+template<class T>
+double QuadraticHash<T>::getTime() const {
+    auto _finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = _finish - _start;
+    return elapsed.count();
+}
+
+template<class T>
+void QuadraticHash<T>::setStartTime() {
+    _start = std::chrono::high_resolution_clock::now();
 }
 
 #endif //OOP_EXAM_QUADRATICHASH_H

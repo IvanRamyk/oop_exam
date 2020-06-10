@@ -6,6 +6,7 @@
 #define OOP_EXAM_HOPSCOTCHHASH_H
 
 #include <vector>
+#include <chrono>
 #include "../../src/Date/Date.hpp"
 #include "../../src/Server/Server.hpp"
 
@@ -18,10 +19,14 @@ public:
 
     std::vector<T> getData() const;
 
+    void setStartTime();
+
+    double getTime() const;
 
 private:
     std::vector<T> _data;
     std::vector<bool> _added;
+    std::chrono::time_point<std::chrono::high_resolution_clock> _start = std::chrono::high_resolution_clock::now();
 
     void add(const T& item);
 };
@@ -62,5 +67,16 @@ void HopscotchHash<T>::add(const T& item) {
     _data[curr] = item;
 }
 
+template<class T>
+double HopscotchHash<T>::getTime() const {
+    auto _finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = _finish - _start;
+    return elapsed.count();
+}
+
+template<class T>
+void HopscotchHash<T>::setStartTime() {
+    _start = std::chrono::high_resolution_clock::now();
+}
 
 #endif //OOP_EXAM_HOPSCOTCHHASH_H

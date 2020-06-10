@@ -6,6 +6,7 @@
 #define OOP_EXAM_CUCKOOHASH_H
 
 #include <vector>
+#include <chrono>
 #include "../../src/Date/Date.hpp"
 #include "../../src/Server/Server.hpp"
 
@@ -18,12 +19,16 @@ public:
 
     std::pair<std::vector<T>, std::vector<T>> getData() const;
 
+    void setStartTime();
+
+    double getTime() const;
 
 private:
     std::vector<T> _data1;
     std::vector<T> _data2;
     std::vector<bool> _added1;
     std::vector<bool> _added2;
+    std::chrono::time_point<std::chrono::high_resolution_clock> _start = std::chrono::high_resolution_clock::now();
 
     void add(const T& item);
 };
@@ -88,6 +93,19 @@ void CuckooHash<T>::add(const T& item) {
         }
     }
 }
+
+    template<class T>
+    double CuckooHash<T>::getTime() const {
+        auto _finish = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = _finish - _start;
+        return elapsed.count();
+    }
+
+    template<class T>
+    void CuckooHash<T>::setStartTime() {
+        _start = std::chrono::high_resolution_clock::now();
+    }
+
 
 
 #endif //OOP_EXAM_CUCKOOHASH_H
