@@ -6,6 +6,7 @@
 #define OOP_EXAM_QUADRATICHASH_H
 
 #include <vector>
+#include <iterator>
 #include <chrono>
 #include "../../src/Date/Date.hpp"
 #include "../../src/Server/Server.hpp"
