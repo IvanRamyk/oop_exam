@@ -26,8 +26,10 @@ namespace ip {
             assert(vls.size() == 4 && "Vector must contain 4 fields!");
             fields = {vls[0], vls[1], vls[2], vls[3]};
         }
+
         friend std::ostream& operator<<(std::ostream& os, const address& IP);
         friend bool operator ==(const address& A, const address& B);
+        friend bool operator <(const address& A, const address& B);
         std::string toString();
 
 
@@ -35,13 +37,15 @@ namespace ip {
 
 }
 
+std::vector<int> convertIpToVector(std::string stringIp);
+
 class Server {
 public:
     ip::address IP;
     std::string data_center;
     std::string rack;
     std::string company;
-    explicit Server(ip::address _IP = ip::address(0,0,0,0), int _id = -1, std::string _rack = "", std::string center = ""): IP(std::move(_IP)), data_center(center), rack(_rack) {};
+    explicit Server(ip::address _IP = ip::address(0,0,0,0), std::string _rack = "", std::string center = "", std::string _company = ""): IP(std::move(_IP)), data_center(center), rack(_rack), company(_company){};
     [[nodiscard]] int toInt() const;
     friend bool operator <(const Server& A, const Server& B);
     friend bool operator >(const Server& A, const Server& B);

@@ -1,6 +1,8 @@
 #include "sortwindow.h"
 #include "ui_sortwindow.h"
 
+#define dateTimeFunc std::function<bool(date_time::DateTime, date_time::DateTime)>
+
 SortWindow::SortWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::SortWindow)
@@ -204,6 +206,8 @@ void SortWindow::on_contentBox_activated(const QString &arg1)
 //    }
     std::vector<QString> serverHeaders = {"id", "IP", "Data center", "Rack", "Company"};
     std::vector<QString> dateTimeHeaders = {"id", "year", "month", "day", "hour", "minute", "second"};
+
+
     if(arg1 == "Сервери"){
         for (int col = 0; col < serverHeaders.size(); ++col) {
                 auto hitem = new QTableWidgetItem;
@@ -211,7 +215,12 @@ void SortWindow::on_contentBox_activated(const QString &arg1)
                 table->setHorizontalHeaderItem(col, hitem);
                 table->model()->setHeaderData(col, Qt::Horizontal, serverHeaders[col], Qt::DisplayRole);
         }
-        ui->sortingParamether->setItemText(0,"Серверок");
+        for(int i = 0; i < 4; i++)
+        ui->sortingParamether->setItemText(i,serverHeaders[i+1]);
+        ui->sortingParamether->setMaxCount(4);
+
+
+
     }else if(arg1 == "Дата і час"){
         for (int col = 0; col < dateTimeHeaders.size(); ++col) {
                 auto hitem = new QTableWidgetItem;
@@ -219,9 +228,56 @@ void SortWindow::on_contentBox_activated(const QString &arg1)
                 table->setHorizontalHeaderItem(col, hitem);
                 table->model()->setHeaderData(col, Qt::Horizontal, dateTimeHeaders[col], Qt::DisplayRole);
         }
-        ui->sortingParamether->setItemText(0,"DateTime");
+        ui->sortingParamether->setMaxCount(6);
+        ui->sortingParamether->addItem(dateTimeHeaders[5]);
+        ui->sortingParamether->addItem(dateTimeHeaders[6]);
+        for(int i = 0; i < 6; i++)
+            ui->sortingParamether->setItemText(i,dateTimeHeaders[i+1]);
     }
         else{
             std::cout << arg1.toStdString();
         }
+}
+
+std::map <QString, std::function<bool(Server, Server)>> lambdaMapServer = {
+    {"IP", [](Server a, Server b){ return  a.IP < b.IP;}},
+    {"Data center", [](Server a, Server b){ return  a.data_center < b.data_center;}},
+    {"Rack", [](Server a, Server b){ return  a.rack < b.rack;}},
+    {"Company", [](Server a, Server b){ return  a.company < b.company;}}
+        };
+
+std::map <QString, dateTimeFunc> lambdaMapDateTime = {
+        {"years", [](date_time::DateTime a, date_time::DateTime b){ auto va = a.to_vector(); auto vb = b.to_vector(); return  va[0] < vb[0];}},
+    {"month", [](date_time::DateTime a, date_time::DateTime b){ auto va = a.to_vector(); auto vb = b.to_vector(); return  va[1] < vb[1];}},
+    {"days", [](date_time::DateTime a, date_time::DateTime b){ auto va = a.to_vector(); auto vb = b.to_vector(); return  va[2] < vb[2];}},
+    {"hours", [](date_time::DateTime a, date_time::DateTime b){ auto va = a.to_vector(); auto vb = b.to_vector(); return  va[3] < vb[3];}},
+    {"minutes", [](date_time::DateTime a, date_time::DateTime b){ auto va = a.to_vector(); auto vb = b.to_vector(); return  va[4] < vb[4];}},
+    {"seconds", [](date_time::DateTime a, date_time::DateTime b){ auto va = a.to_vector(); auto vb = b.to_vector(); return  va[5] < vb[5];}},
+        };
+
+
+
+std::vector<Server> SortWindow::getVectorServer(){
+    auto table = ui->tableWidget;
+    int n = table->rowCount();
+    for(int i = 0; i < n; i++){
+        ip::address ad(convertIpToVector("192.87.1.0"));
+        std::string s1 = table->item(i,2)->text().toStdString();
+        std::string s2 = table->item(i,3)->text().toStdString();
+        std::string s3 = table->item(i,4)->text().toStdString();
+        Server s(ad, s1, s2, s3);
+    }
+}
+
+
+void SortWindow::on_sortButton_clicked()
+{
+    if(elementType == elementServer){
+        auto lambda = lambdaMapServer[ui->sortingParamether->currentText()];
+        std::vector<Server> vec = getVectorServer();
+            Sort<Server> sort(vec);
+            sort.selectionSort(lambda);
+    }
+    std::cout << "!" << std::endl;
+
 }

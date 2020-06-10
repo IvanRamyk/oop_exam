@@ -4,6 +4,7 @@
 #include "perform.h"
 #include "../../src/Date/Date.hpp"
 #include"../../src/Server/Server.hpp"
+#include "../../src/Sort/Sort.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -44,6 +45,8 @@ private slots:
 
     void on_contentBox_activated(const QString &arg1);
 
+    void on_sortButton_clicked();
+
 private:
     Ui::SortWindow *ui;
     void fillTable(int index);
@@ -51,6 +54,9 @@ private:
     void fillElement(date_time::DateTime &dt);
     containType containerType;
     elemType elementType;
+
+
+    std::vector<Server> getVectorServer();
 
     void insertServerInTable(Server s);
     void insertDateTimeInTable(date_time::DateTime s);

@@ -148,10 +148,10 @@ void PerformSetWindow::fillElement(int tableId, Server &s){
             break;
     }
 
-    std::vector<int> id = {1,2,3,4};
-
-
-
+    s.IP = ip::address(convertIpToVector(table->item(0,1)->text().toStdString()));
+    s.data_center = table->item(1,1)->text().toStdString();
+    s.rack = table->item(2,1)->text().toStdString();
+    s.company = table->item(3,1)->text().toStdString();
 }
 
 

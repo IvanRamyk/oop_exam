@@ -42,6 +42,34 @@ bool operator ==(const Server& A, const Server& B) {
             && A.company == B.company;
 }
 
+bool ip::operator <(const ip::address& A, const ip::address& B){
+	for(int i = 0; i < 4; i++){
+		if(A.fields[i] != B.fields[i])
+			return A.fields[i] < B.fields[i];
+	}
+	return false;
+
+}
+
+std::vector<int> convertIpToVector(std::string stringIp){
+    size_t index = 0;
+    std::vector <int> field = {0,0,0,0};
+    int i = 0, n = stringIp.size();
+    while (i < n) {
+        if (isdigit(stringIp[i])) {
+            field[index] *= 10;
+            field[index] += stringIp[i] - '0';
+        } else {
+            index++;
+            if(index > 3)
+                break;
+        }
+        i++;
+    }
+    return field;
+
+}
+
 
 std::string ip::address::toString(){
 	std::string s = "";
@@ -49,7 +77,7 @@ std::string ip::address::toString(){
 		s += std::to_string(fields[i]) + ".";
 	s += std::to_string(fields[fields.size()-1]);
     return s;
-
+}
 
 int Server::toInt() const {
     std::string hashString = data_center + rack + company;

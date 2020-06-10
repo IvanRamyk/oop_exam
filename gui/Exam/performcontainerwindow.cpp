@@ -89,9 +89,11 @@ void PerformContainerWindow::fillElement(Server &s){
     std::string name;
     table = ui->insertElement;
 
-    s.data_center = getField(table->item(1,1)).toStdString();
-    s.rack = getField(table->item(2,1)).toStdString();
-    s.company = getField(table->item(3,1)).toStdString();
+
+    s.IP = ip::address(convertIpToVector(table->item(0,1)->text().toStdString()));
+    s.data_center = table->item(1,1)->text().toStdString();
+    s.rack = table->item(2,1)->text().toStdString();
+    s.company = table->item(3,1)->text().toStdString();
 
 }
 
