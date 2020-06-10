@@ -12,18 +12,23 @@ template <class T> class Sort {
 public:
     explicit Sort(const std::vector<T>& data);
 
+    explicit Sort()= default;
+
+    void setData(std::vector<T> data) {_data = data;}
+
     void selectionSort(const std::function<bool(T, T)>& compare);
 
     void heapSort(const std::function<bool(T, T)>& compare);
 
     void mergeSort(const std::function<bool(T, T)>& compare);
 
-    void countingSort(const std::function<bool(T, T)>& compare); //TODO
+    void countingSort(const std::function<bool(T, T)>& compare);
 
     void insertionSort(const std::function<bool(T, T)>& compare);
 
     void quickSort(const std::function<bool(T, T)>& compare);
 
+    void radixSort(const std::function<bool(T, T)>& compare);
 
     std::vector<T> getData() const;
 private:

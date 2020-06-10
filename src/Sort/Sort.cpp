@@ -93,6 +93,26 @@ void Sort<T>::mergePart(std::vector<T>& vec, std::vector<T>& temp, const std::fu
 
 template<class T>
 void Sort<T>::countingSort(const std::function<bool(T, T)> &compare) {
+    std::vector<int> temp(_data.size());
+    for (auto it = begin(_data); it < end(_data); ++it) {
+        ++temp[it->type];
+    }
+
+    for (int i = 1; i < temp.size(); ++i) {
+        temp[i] += temp[i - 1];
+    }
+
+    for (int i = static_cast<int>(temp.size() - 1); i >= 0; --i) {
+        temp[i] = temp[i - 1];
+    }
+    temp[0] = 0;
+
+    std::vector<int> res(_data.size());
+    for (auto it = begin(_data); it < end(_data); ++it) {
+        res[temp[it->type]] = *it;
+        ++temp[it->type];
+    }
+    _data = res;
 }
 
 template<class T>
@@ -143,5 +163,43 @@ void Sort<T>::quickPartSort(iter begin, iter end, const std::function<bool(T, T)
         iter pivot = partition(begin, end, compare);
         quickPartSort(begin, pivot);
         quickPartSort(pivot + 1, end);
+    }
+}
+
+int getNumber (int n, int k) {
+    for (int i = 0; i < k; ++i) {
+        n /= 10;
+    }
+    return n % 10;
+}
+
+template<class T>
+void Sort<T>::radixSort(const std::function<bool(T, T)> &compare) {
+    int MAX = INT32_MAX;
+    int k = 0;
+    while(MAX != 0) {
+        std::vector<int> temp(_data.size());
+        for (auto it = begin(_data); it < end(_data); ++it) {
+            ++temp[getNumber(it->health, k)];
+        }
+
+        for (int i = 1; i < temp.size(); ++i) {
+            temp[i] += temp[i - 1];
+        }
+
+        for (int i = static_cast<int>(temp.size() - 1); i >= 0; --i) {
+            temp[i] = temp[i - 1];
+        }
+        temp[0] = 0;
+
+        std::vector<int> res(_data.size());
+        for (auto it = begin(_data); it < end(_data); ++it) {
+            res[temp[getNumber(it->health, k)]] = *it;
+            ++temp[getNumber(it->health, k)];
+        }
+        _data = res;
+
+        MAX /= 10;
+        ++k;
     }
 }
