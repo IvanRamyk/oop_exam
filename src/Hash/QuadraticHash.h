@@ -53,8 +53,9 @@ auto QuadraticHash<T>::search(const T &item) const {
 
 template<class T>
 QuadraticHash<T>::QuadraticHash(const std::vector<T> &vec) {
-    _data.resize(vec.size());
-    _added.resize(vec.size());
+    int size = 1000;
+    _data.resize(size);
+    _added.resize(size);
     for (const auto& item : vec) {
         add(item);
     }

@@ -53,8 +53,9 @@ auto HopscotchHash<T>::search(const T &item) const {
 
 template<class T>
 HopscotchHash<T>::HopscotchHash(const std::vector<T> &vec) {
-    _data.resize(vec.size()*2);
-    _added.resize(vec.size()*2);
+    int size = 1000;
+    _data.resize(size);
+    _added.resize(size);
     for (const auto& item : vec) {
         add(item);
     }

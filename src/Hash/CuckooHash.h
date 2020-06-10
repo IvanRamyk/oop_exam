@@ -57,10 +57,11 @@ auto CuckooHash<T>::search(const T &item) const {
 
 template<class T>
 CuckooHash<T>::CuckooHash(const std::vector<T> &vec) {
-    _data1.resize(vec.size()*2);
-    _data2.resize(vec.size()*2);
-    _added1.resize(vec.size());
-    _added2.resize(vec.size());
+    int size = 1000;
+    _data1.resize(size);
+    _data2.resize(size);
+    _added1.resize(size);
+    _added2.resize(size);
     for (const auto& item : vec) {
         add(item);
     }
