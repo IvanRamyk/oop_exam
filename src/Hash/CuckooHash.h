@@ -23,14 +23,16 @@ public:
 
     double getTime() const;
 
+    void add(const T& item);
+
+    void deleteCopy();
+
 private:
     std::vector<T> _data1;
     std::vector<T> _data2;
     std::vector<bool> _added1;
     std::vector<bool> _added2;
     std::chrono::time_point<std::chrono::high_resolution_clock> _start = std::chrono::high_resolution_clock::now();
-
-    void add(const T& item);
 };
 
 template<class T>
@@ -105,6 +107,26 @@ void CuckooHash<T>::add(const T& item) {
     void CuckooHash<T>::setStartTime() {
         _start = std::chrono::high_resolution_clock::now();
     }
+
+
+template<class T>
+void CuckooHash<T>::deleteCopy() {
+    for (int i = 0; i < _data1.size(); ++i) {
+        for (int j = i + 1; j < _data1.size(); ++j) {
+            if (_data1[i] == _data1[j]) {
+                _data1[j] = {};
+                _added1[j] = false;
+            }
+        }
+
+        for (int j = 0; j < _data2.size(); ++j) {
+            if (_data1[i] == _data2[j]) {
+                _data2[j] = {};
+                _added2[j] = false;
+            }
+        }
+    }
+}
 
 
 

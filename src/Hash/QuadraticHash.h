@@ -23,12 +23,14 @@ public:
 
     double getTime() const;
 
+    void add(const T& item);
+
+    void deleteCopy();
+
 private:
     std::vector<T> _data;
     std::vector<bool> _added;
     std::chrono::time_point<std::chrono::high_resolution_clock> _start = std::chrono::high_resolution_clock::now();
-
-    void add(const T& item);
 };
 
 template<class T>
@@ -82,6 +84,18 @@ double QuadraticHash<T>::getTime() const {
 template<class T>
 void QuadraticHash<T>::setStartTime() {
     _start = std::chrono::high_resolution_clock::now();
+}
+
+template<class T>
+void QuadraticHash<T>::deleteCopy() {
+    for (int i = 0; i < _data.size(); ++i) {
+        for (int j = i + 1; j < _data.size(); ++j) {
+            if (_data[i] == _data[j]) {
+                _data[j] = {};
+                _added[j] = false;
+            }
+        }
+    }
 }
 
 #endif //OOP_EXAM_QUADRATICHASH_H
