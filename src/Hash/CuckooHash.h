@@ -13,7 +13,8 @@
 
 template <class T> class CuckooHash {
 public:
-    explicit CuckooHash(const std::vector<T>& vec);
+    using value_type = T;
+    explicit CuckooHash(const std::vector<T>& vec =  {});
 
     auto search(const T& item) const;
 

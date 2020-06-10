@@ -12,6 +12,8 @@
 #include "../../structures/balanced_searched_trees/BPlusTree.hpp"
 #include "../../structures/balanced_searched_trees/AVLTree.hpp"
 #include "../../structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp"
+#include "../../structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp"
+#include "../../Hash/CuckooHash.h"
 
 template <typename Structure>
 struct SetOperations;
@@ -100,6 +102,36 @@ struct SetOperations <AVLTree<T>> {
     }
 
     static auto elements(AVLTree<T>& container)
+    {
+        //return container.elements();
+        return std::vector<T> {};
+    }
+};
+
+template <typename T>
+struct SetOperations <CuckooHash<T>> {
+    using value_type = typename CuckooHash<T>::value_type;
+    static auto insert (CuckooHash<T>& container, const value_type& value)
+    {
+        container.add(value);
+    }
+
+    static auto count(CuckooHash<T>& container, const value_type& value)
+    {
+        return container.search(value) != container.getData().first.end();
+    }
+
+    static auto search(CuckooHash<T>& container, const value_type& value)
+    {
+        return container.search(value);
+    }
+
+    static auto erase(CuckooHash<T>& container, const value_type& value)
+    {
+        container.erase(value);
+    }
+
+    static auto elements(CuckooHash<T>& container)
     {
         //return container.elements();
         return std::vector<T> {};
