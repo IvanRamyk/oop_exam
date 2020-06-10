@@ -80,8 +80,7 @@ QString getValue(QTableWidgetItem* it){
 
 void SortWindow::fillElement(Server& s){
     auto table = ui->insertElement;
-    ip::address aps(1,2,3,4);
-    s.IP = aps;
+    s.IP = ip::address(convertIpToVector(table->item(0,1)->text().toStdString()));
     s.data_center = getValue(table->item(1,1)).toStdString();
     s.rack = getValue(table->item(2,1)).toStdString();
     s.company = getValue(table->item(3,1)).toStdString();
@@ -90,11 +89,11 @@ void SortWindow::fillElement(Server& s){
 void SortWindow::fillElement(date_time::DateTime& dt){
     auto table = ui->insertElement;
     int names[6];
-    for(int i  =0; i < 6; i++){
+    for(int i = 0; i < 6; i++){
         names[i] = getValue(table->item(i,1)).toInt();
         //check correct
     }
-    date_time::DateTime newdt(names[0]-1, date_time::Month(names[1]-1), names[2]-1, names[3]-1, names[4]-1, names[5]-1);
+    date_time::DateTime newdt(names[0], date_time::Month(names[1]), names[2], names[3], names[4], names[5]);
     dt = newdt;
 }
 
@@ -128,16 +127,15 @@ void SortWindow::insertServerInTable(Server s){
     int n = ui->tableWidget->rowCount();
     ui->tableWidget->insertRow(n);
     QString id = QString::fromStdString(std::to_string(n + 1));
-    QTableWidgetItem* it = new QTableWidgetItem(id);
-    ui->tableWidget->setItem(n,0, it);
+    QTableWidgetItem* it;
     it = new QTableWidgetItem(QString::fromStdString(s.IP.toString()));
-    ui->tableWidget->setItem(n,1, it);
+    ui->tableWidget->setItem(n,0, it);
     it = new QTableWidgetItem(QString::fromStdString(s.data_center));
-    ui->tableWidget->setItem(n,2, it);
+    ui->tableWidget->setItem(n,1, it);
     it = new QTableWidgetItem(QString::fromStdString(s.rack));
-    ui->tableWidget->setItem(n,3, it);
+    ui->tableWidget->setItem(n,2, it);
     it = new QTableWidgetItem(QString::fromStdString(s.company));
-    ui->tableWidget->setItem(n,4, it);
+    ui->tableWidget->setItem(n,3, it);
 }
 
 void SortWindow::insertDateTimeInTable(date_time::DateTime dt){
@@ -342,7 +340,23 @@ void SortWindow::on_sortButton_clicked()
         auto lambda = lambdaMapServer[ui->sortingParamether->currentText()];
         std::vector<Server> vec = getVectorServer();
             Sort<Server> sort(vec);
+        if(sortType == selectionSort){
             sort.selectionSort(lambda);
+        } else if(sortType == mergeSort) {
+            sort.mergeSort(lambda);
+        } else if(sortType == InsertSort){
+            sort.insertionSort(lambda);
+        } else if(sortType == Heapsort){
+            sort.heapSort(lambda);
+        } else if(sortType == QuickSort){
+            sort.quickSort(lambda);
+        } else {
+            QMessageBox msgBox;
+            msgBox.setText("Не можна використовувати це сортування для нечислових типів!");
+            msgBox.exec();
+            sortType = selectionSort;
+            ui->sortType->setCurrentIndex(0);
+        }
         auto res = sort.getData();
         setVectorServer(res);
     } else {

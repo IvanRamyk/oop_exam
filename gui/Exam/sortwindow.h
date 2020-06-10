@@ -6,10 +6,14 @@
 #include"../../src/Server/Server.hpp"
 #include "../../src/Sort/Sort.h"
 #include <QMainWindow>
+#include <QMessageBox>
+
+enum sortingType{selectionSort, mergeSort, Heapsort, InsertSort, QuickSort, nonInt};
 
 namespace Ui {
 class SortWindow;
 }
+
 
 class SortWindow : public QMainWindow
 {
@@ -54,6 +58,8 @@ private:
     void fillElement(date_time::DateTime &dt);
     containType containerType;
     elemType elementType;
+    sortingType sortType;
+
 
 
     std::vector<Server> getVectorServer();

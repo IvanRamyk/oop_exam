@@ -132,7 +132,7 @@
      <string>Функціонал: сортування</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="contentBox_2">
+   <widget class="QComboBox" name="sortType">
     <property name="geometry">
      <rect>
       <x>140</x>
