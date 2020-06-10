@@ -15,7 +15,7 @@ template <class T> class QuadraticHash {
 public:
     explicit QuadraticHash(const std::vector<T>& vec);
 
-    typename std::vector<T>::iterator search(const T& item) const;
+    auto search(const T& item) const;
 
     std::vector<T> getData() const;
 
@@ -39,7 +39,7 @@ std::vector<T> QuadraticHash<T>::getData() const {
 }
 
 template<class T>
-typename std::vector<T>::iterator QuadraticHash<T>::search(const T &item) const {
+auto QuadraticHash<T>::search(const T &item) const {
     int i = 0;
     while (true) {
         if (_data[(item.toInt() + i*i) % _data.size()] == item) {

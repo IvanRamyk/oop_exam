@@ -15,7 +15,7 @@ template <class T> class HopscotchHash {
 public:
     explicit HopscotchHash(const std::vector<T>& vec);
 
-    typename std::vector<T>::iterator search(const T& item) const;
+    auto search(const T& item) const;
 
     std::vector<T> getData() const;
 
@@ -41,7 +41,7 @@ std::vector<T> HopscotchHash<T>::getData() const {
 }
 
 template<class T>
-typename std::vector<T>::iterator HopscotchHash<T>::search(const T &item) const {
+auto HopscotchHash<T>::search(const T &item) const {
     for (int i = item.toInt() % _data.size(); i < _data.size(); ++i) {
         i %= _data.size();
         if (_data[i] == item) {

@@ -220,7 +220,7 @@ void Sort<T>::quickPartSort(iter begin, iter end, const std::function<bool(T, T)
     }
 }
 
-int getNumber (int n, int k) {
+inline int getNumber (int n, int k) {
     for (int i = 0; i < k; ++i) {
         n /= 10;
     }
