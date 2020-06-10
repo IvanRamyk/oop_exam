@@ -225,15 +225,15 @@ TEST(Set, withServer) {
     Set<SplayTree<Server>> forServer;
     forServer.insert(Server(ip::address(1,1,1,1)));
     forServer.insert(Server(ip::address(1,2,1,1)));
-    forServer.insert(Server(ip::address(1,2,1,1), 2, "asd", "asd"));
-    EXPECT_TRUE(forServer.count(Server(ip::address(1,2,1,1), 2, "asd", "asd")));
+    forServer.insert(Server(ip::address(1,2,1,1), "2", "asd", "asd"));
+    EXPECT_TRUE(forServer.count(Server(ip::address(1,2,1,1), "2", "asd", "asd")));
 }
 
 TEST(Set, listServer) {
     Set<SingleLinkedOrderedList<Server>> set;
-    set.insert(Server(ip::address(), 1, "3", "4"));
-    EXPECT_TRUE(set.search(Server(ip::address(), 1, "3", "4")) != nullptr);
-    EXPECT_TRUE(set.search(Server(ip::address(), 1, "3", "2")) == nullptr);
+    set.insert(Server(ip::address(), "1", "3", "4"));
+    EXPECT_TRUE(set.search(Server(ip::address(), "1", "3", "4")) != nullptr);
+    EXPECT_TRUE(set.search(Server(ip::address(), "1", "1", "2")) == nullptr);
 }
 
 
@@ -244,9 +244,9 @@ TEST(Set, Comporator) {
         }
     };
     Set<SplayTree<Server, Comp>> set;
-    set.insert(Server(ip::address(), 1, "3", "4"));
-    EXPECT_TRUE(set.search(Server(ip::address(), 1, "3", "4")) != nullptr);
-    EXPECT_TRUE(set.search(Server(ip::address(), 1, "3", "2")) == nullptr);
+    set.insert(Server(ip::address(), "1", "3", "4"));
+    EXPECT_TRUE(set.search(Server(ip::address(), "1", "3", "4")) != nullptr);
+    EXPECT_TRUE(set.search(Server(ip::address(), "1", "1", "2")) == nullptr);
 }
 
 TEST(Set, ComporatorList) {
@@ -256,7 +256,7 @@ TEST(Set, ComporatorList) {
         }
     };
     Set<SingleLinkedOrderedList<Server, Comp>> set;
-    set.insert(Server(ip::address(), 1, "3", "4"));
-    EXPECT_TRUE(set.search(Server(ip::address(), 1, "3", "4")) != nullptr);
-    EXPECT_TRUE(set.search(Server(ip::address(), 1, "3", "2")) == nullptr);
+    set.insert(Server(ip::address(), "1", "3", "4"));
+    EXPECT_TRUE(set.search(Server(ip::address(), "1", "3", "4")) != nullptr);
+    EXPECT_TRUE(set.search(Server(ip::address(), "1", "1", "2")) == nullptr);
 }
