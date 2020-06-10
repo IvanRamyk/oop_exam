@@ -4,6 +4,8 @@
 #include "../../src/Server/Server.hpp"
 #include "../../src/Date/Date.hpp"
 #include "../../src/containers/Map/Map.hpp"
+#include "../../src/Hash/HopscotchHash.h"
+#include "../../src/Hash/CuckooHash.h"
 #include "perform.h"
 #include <QMainWindow>
 

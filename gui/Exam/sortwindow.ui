@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1123</width>
+    <width>1052</width>
     <height>600</height>
    </rect>
   </property>
@@ -182,15 +182,10 @@
      <rect>
       <x>360</x>
       <y>80</y>
-      <width>701</width>
+      <width>641</width>
       <height>411</height>
      </rect>
     </property>
-    <column>
-     <property name="text">
-      <string>id</string>
-     </property>
-    </column>
     <column>
      <property name="text">
       <string>IP</string>
@@ -274,7 +269,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1123</width>
+     <width>1052</width>
      <height>22</height>
     </rect>
    </property>

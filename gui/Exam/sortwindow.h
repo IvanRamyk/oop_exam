@@ -57,6 +57,10 @@ private:
 
 
     std::vector<Server> getVectorServer();
+    void setVectorServer(std::vector<Server> res);
+
+    std::vector<date_time::DateTime> getVectorDateTime();
+    void setVectorDateTime(std::vector<date_time::DateTime> res);
 
     void insertServerInTable(Server s);
     void insertDateTimeInTable(date_time::DateTime s);

@@ -20,10 +20,19 @@ bool ip::operator ==(const ip::address& A, const ip::address& B){
 
 
 bool operator <(const Server& A, const Server& B) {
+    if(A == B)
+        return false;
+    for(int i = 0 ; i < 4; i++)
+        if(A.IP.field(i) < B.IP.field(i))
+            return true;
+        else if (A.IP.field(i) > B.IP.field(i))
+            return false;
     if (A.data_center != B.data_center)
         return A.data_center < B.data_center;
     if (A.rack != B.rack)
         return A.rack < B.rack;
+    if (A.company != B.company)
+        return A.company < B.company;
     return false;
 }
 

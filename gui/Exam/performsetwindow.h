@@ -8,6 +8,8 @@
 #include "../../src/containers/Set/Set.hpp"
 #include "../../src/structures/balanced_searched_trees/SplayTree.hpp"
 #include "../../src/structures/lists/SingleLinkedList/SingleLinkedOrderedList.hpp"
+#include "../../src/Hash/CuckooHash.h"
+#include <iterator>
 #include <QMainWindow>
 
 #include "perform.h"

@@ -5,6 +5,8 @@ Map<std::string, Server, SplayTree> mapSplayServer;
 Map<std::string, date_time::DateTime, SplayTree> mapSplayDateTime;
 Map<std::string, Server, SingleLinkedOrderedList> mapListServer;
 Map<std::string, date_time::DateTime, SingleLinkedOrderedList> mapListDateTime;
+//Map<std::string, Server, CuckooHash<Server>>setHashServer;
+//Map<std::string, date_time::DateTime, CuckooHash<date_time::DateTime>> setHashDateTime;
 
 PerformContainerWindow::PerformContainerWindow(containType _type, QWidget *parent) :
     QMainWindow(parent),
